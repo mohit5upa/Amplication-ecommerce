@@ -7,9 +7,10 @@ import {
   TextInput,
   NumberInput,
   DateTimeInput,
-  SelectArrayInput,
+  SelectInput,
   BooleanInput,
   PasswordInput,
+  SelectArrayInput,
 } from "react-admin";
 
 import { ROLES_OPTIONS } from "../user/RolesOptions";
@@ -27,15 +28,16 @@ export const UserEdit = (props: EditProps): React.ReactElement => {
         <DateTimeInput label="dob" source="dob" />
         <TextInput label="Email" source="email" type="email" />
         <TextInput label="First Name" source="firstName" />
-        <SelectArrayInput
-          label="Gender"
+        <SelectInput
           source="gender"
+          label="Gender"
           choices={[
             { label: "male", value: "Male" },
             { label: "female", value: "Female" },
             { label: "other", value: "Other" },
           ]}
           optionText="label"
+          allowEmpty
           optionValue="value"
         />
         <TextInput label="Image" source="image" />

@@ -82,16 +82,13 @@ class UserCreateInput {
   @ApiProperty({
     required: false,
     enum: EnumUserGender,
-    isArray: true,
   })
-  @IsEnum(EnumUserGender, {
-    each: true,
-  })
+  @IsEnum(EnumUserGender)
   @IsOptional()
-  @Field(() => [EnumUserGender], {
+  @Field(() => EnumUserGender, {
     nullable: true,
   })
-  gender?: Array<"Male" | "Female" | "Other">;
+  gender?: "Male" | "Female" | "Other" | null;
 
   @ApiProperty({
     required: false,

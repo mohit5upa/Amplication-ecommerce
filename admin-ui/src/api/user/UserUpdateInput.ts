@@ -6,7 +6,7 @@ export type UserUpdateInput = {
   dob?: Date | null;
   email?: string;
   firstName?: string | null;
-  gender?: Array<"Male" | "Female" | "Other">;
+  gender?: "Male" | "Female" | "Other" | null;
   image?: string | null;
   isSuspended?: boolean | null;
   isVerified?: boolean | null;

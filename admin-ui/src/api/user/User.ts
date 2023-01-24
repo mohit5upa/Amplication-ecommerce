@@ -7,7 +7,7 @@ export type User = {
   dob: Date | null;
   email: string;
   firstName: string | null;
-  gender?: Array<"Male" | "Female" | "Other">;
+  gender?: "Male" | "Female" | "Other" | null;
   id: string;
   image: string | null;
   isSuspended: boolean | null;
