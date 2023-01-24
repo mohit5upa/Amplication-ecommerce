@@ -25,7 +25,7 @@ class ProductOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  createdAt?: SortOrder;
+  attributeFamilyId?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -34,7 +34,7 @@ class ProductOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  description?: SortOrder;
+  createdAt?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -52,7 +52,7 @@ class ProductOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  itemPrice?: SortOrder;
+  parentId?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -61,7 +61,16 @@ class ProductOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  name?: SortOrder;
+  sku?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  types?: SortOrder;
 
   @ApiProperty({
     required: false,

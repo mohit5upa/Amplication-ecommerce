@@ -1,10 +1,11 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type ProductOrderByInput = {
+  attributeFamilyId?: SortOrder;
   createdAt?: SortOrder;
-  description?: SortOrder;
   id?: SortOrder;
-  itemPrice?: SortOrder;
-  name?: SortOrder;
+  parentId?: SortOrder;
+  sku?: SortOrder;
+  types?: SortOrder;
   updatedAt?: SortOrder;
 };

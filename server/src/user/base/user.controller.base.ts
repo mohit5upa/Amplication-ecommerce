@@ -27,12 +27,6 @@ import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserUpdateInput } from "./UserUpdateInput";
 import { User } from "./User";
-import { AddressFindManyArgs } from "../../address/base/AddressFindManyArgs";
-import { Address } from "../../address/base/Address";
-import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
-import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
-import { Order } from "../../order/base/Order";
-import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
@@ -54,13 +48,23 @@ export class UserControllerBase {
     return await this.service.create({
       data: data,
       select: {
+        apiToken: true,
         createdAt: true,
+        customerGroupId: true,
+        dob: true,
         email: true,
         firstName: true,
+        gender: true,
         id: true,
+        image: true,
+        isSuspended: true,
+        isVerified: true,
         lastName: true,
-        phone: true,
+        mobileNumber: true,
+        rememberToken: true,
         roles: true,
+        status: true,
+        token: true,
         updatedAt: true,
         username: true,
       },
@@ -82,13 +86,23 @@ export class UserControllerBase {
     return this.service.findMany({
       ...args,
       select: {
+        apiToken: true,
         createdAt: true,
+        customerGroupId: true,
+        dob: true,
         email: true,
         firstName: true,
+        gender: true,
         id: true,
+        image: true,
+        isSuspended: true,
+        isVerified: true,
         lastName: true,
-        phone: true,
+        mobileNumber: true,
+        rememberToken: true,
         roles: true,
+        status: true,
+        token: true,
         updatedAt: true,
         username: true,
       },
@@ -111,13 +125,23 @@ export class UserControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        apiToken: true,
         createdAt: true,
+        customerGroupId: true,
+        dob: true,
         email: true,
         firstName: true,
+        gender: true,
         id: true,
+        image: true,
+        isSuspended: true,
+        isVerified: true,
         lastName: true,
-        phone: true,
+        mobileNumber: true,
+        rememberToken: true,
         roles: true,
+        status: true,
+        token: true,
         updatedAt: true,
         username: true,
       },
@@ -149,13 +173,23 @@ export class UserControllerBase {
         where: params,
         data: data,
         select: {
+          apiToken: true,
           createdAt: true,
+          customerGroupId: true,
+          dob: true,
           email: true,
           firstName: true,
+          gender: true,
           id: true,
+          image: true,
+          isSuspended: true,
+          isVerified: true,
           lastName: true,
-          phone: true,
+          mobileNumber: true,
+          rememberToken: true,
           roles: true,
+          status: true,
+          token: true,
           updatedAt: true,
           username: true,
         },
@@ -186,13 +220,23 @@ export class UserControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          apiToken: true,
           createdAt: true,
+          customerGroupId: true,
+          dob: true,
           email: true,
           firstName: true,
+          gender: true,
           id: true,
+          image: true,
+          isSuspended: true,
+          isVerified: true,
           lastName: true,
-          phone: true,
+          mobileNumber: true,
+          rememberToken: true,
           roles: true,
+          status: true,
+          token: true,
           updatedAt: true,
           username: true,
         },
@@ -205,210 +249,5 @@ export class UserControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "read",
-    possession: "any",
-  })
-  @common.Get("/:id/addresses")
-  @ApiNestedQuery(AddressFindManyArgs)
-  async findManyAddresses(
-    @common.Req() request: Request,
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<Address[]> {
-    const query = plainToClass(AddressFindManyArgs, request.query);
-    const results = await this.service.findAddresses(params.id, {
-      ...query,
-      select: {
-        address_1: true,
-        address_2: true,
-        city: true,
-        createdAt: true,
-        id: true,
-        state: true,
-        updatedAt: true,
-        zip: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Post("/:id/addresses")
-  async connectAddresses(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: AddressWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      addresses: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Patch("/:id/addresses")
-  async updateAddresses(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: AddressWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      addresses: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Delete("/:id/addresses")
-  async disconnectAddresses(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: AddressWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      addresses: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "read",
-    possession: "any",
-  })
-  @common.Get("/:id/orders")
-  @ApiNestedQuery(OrderFindManyArgs)
-  async findManyOrders(
-    @common.Req() request: Request,
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<Order[]> {
-    const query = plainToClass(OrderFindManyArgs, request.query);
-    const results = await this.service.findOrders(params.id, {
-      ...query,
-      select: {
-        createdAt: true,
-        discount: true,
-        id: true,
-
-        product: {
-          select: {
-            id: true,
-          },
-        },
-
-        quantity: true,
-        totalPrice: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Post("/:id/orders")
-  async connectOrders(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: OrderWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      orders: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Patch("/:id/orders")
-  async updateOrders(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: OrderWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      orders: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Delete("/:id/orders")
-  async disconnectOrders(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: OrderWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      orders: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 }

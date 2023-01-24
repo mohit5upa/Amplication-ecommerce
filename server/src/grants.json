@@ -61,121 +61,301 @@
   },
   {
     "role": "admin",
-    "resource": "Order",
+    "resource": "Role",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Order",
+    "resource": "Role",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Order",
+    "resource": "Role",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Order",
+    "resource": "Role",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Order",
+    "resource": "Role",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Order",
+    "resource": "Role",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Order",
+    "resource": "Role",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Order",
+    "resource": "Role",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Order",
+    "resource": "Role",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Order",
+    "resource": "Role",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "admin",
-    "resource": "Address",
+    "resource": "UserRole",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Address",
+    "resource": "UserRole",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "ProductCategory",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "ProductCategory",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "ProductCategory",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "ProductCategory",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "ProductCategory",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "ProductCategory",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "ProductCategory",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "ProductCategory",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "ProductCategory",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "ProductCategory",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "CustomerGroup",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "CustomerGroup",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "CustomerGroup",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "CustomerGroup",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "CustomerGroup",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "CustomerGroup",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "CustomerGroup",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "CustomerGroup",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "CustomerGroup",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "CustomerGroup",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Category",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Category",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Category",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Category",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Category",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Category",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Category",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Category",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Category",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Category",
     "action": "read:any",
     "attributes": "*"
   },

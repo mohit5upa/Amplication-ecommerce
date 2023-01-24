@@ -19,37 +19,41 @@ import { ProductService } from "../product.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  attributeFamilyId: 42,
   createdAt: new Date(),
-  description: "exampleDescription",
   id: "exampleId",
-  itemPrice: 42.42,
-  name: "exampleName",
+  parentId: 42,
+  sku: "exampleSku",
+  types: "exampleTypes",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  attributeFamilyId: 42,
   createdAt: new Date(),
-  description: "exampleDescription",
   id: "exampleId",
-  itemPrice: 42.42,
-  name: "exampleName",
+  parentId: 42,
+  sku: "exampleSku",
+  types: "exampleTypes",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    attributeFamilyId: 42,
     createdAt: new Date(),
-    description: "exampleDescription",
     id: "exampleId",
-    itemPrice: 42.42,
-    name: "exampleName",
+    parentId: 42,
+    sku: "exampleSku",
+    types: "exampleTypes",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  attributeFamilyId: 42,
   createdAt: new Date(),
-  description: "exampleDescription",
   id: "exampleId",
-  itemPrice: 42.42,
-  name: "exampleName",
+  parentId: 42,
+  sku: "exampleSku",
+  types: "exampleTypes",
   updatedAt: new Date(),
 };
 

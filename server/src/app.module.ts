@@ -2,8 +2,11 @@ import { Module, Scope } from "@nestjs/common";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
-import { OrderModule } from "./order/order.module";
-import { AddressModule } from "./address/address.module";
+import { RoleModule } from "./role/role.module";
+import { UserRoleModule } from "./userRole/userRole.module";
+import { ProductCategoryModule } from "./productCategory/productCategory.module";
+import { CustomerGroupModule } from "./customerGroup/customerGroup.module";
+import { CategoryModule } from "./category/category.module";
 import { ProductModule } from "./product/product.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
@@ -19,8 +22,11 @@ import { GraphQLModule } from "@nestjs/graphql";
   controllers: [],
   imports: [
     UserModule,
-    OrderModule,
-    AddressModule,
+    RoleModule,
+    UserRoleModule,
+    ProductCategoryModule,
+    CustomerGroupModule,
+    CategoryModule,
     ProductModule,
     ACLModule,
     AuthModule,

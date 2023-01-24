@@ -25,8 +25,6 @@ import { DeleteProductArgs } from "./DeleteProductArgs";
 import { ProductFindManyArgs } from "./ProductFindManyArgs";
 import { ProductFindUniqueArgs } from "./ProductFindUniqueArgs";
 import { Product } from "./Product";
-import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
-import { Order } from "../../order/base/Order";
 import { ProductService } from "../product.service";
 
 @graphql.Resolver(() => Product)
@@ -146,25 +144,5 @@ export class ProductResolverBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Order])
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "read",
-    possession: "any",
-  })
-  async orders(
-    @graphql.Parent() parent: Product,
-    @graphql.Args() args: OrderFindManyArgs
-  ): Promise<Order[]> {
-    const results = await this.service.findOrders(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
   }
 }

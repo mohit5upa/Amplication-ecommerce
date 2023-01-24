@@ -1,15 +1,23 @@
-import { AddressListRelationFilter } from "../address/AddressListRelationFilter";
-import { StringFilter } from "../../util/StringFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { OrderListRelationFilter } from "../order/OrderListRelationFilter";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 
 export type UserWhereInput = {
-  addresses?: AddressListRelationFilter;
+  apiToken?: StringNullableFilter;
+  customerGroupId?: IntNullableFilter;
+  dob?: DateTimeNullableFilter;
   email?: StringFilter;
   firstName?: StringNullableFilter;
   id?: StringFilter;
+  image?: StringNullableFilter;
+  isSuspended?: BooleanNullableFilter;
+  isVerified?: BooleanNullableFilter;
   lastName?: StringNullableFilter;
-  orders?: OrderListRelationFilter;
-  phone?: StringFilter;
+  mobileNumber?: StringFilter;
+  rememberToken?: StringNullableFilter;
+  status?: BooleanNullableFilter;
+  token?: StringNullableFilter;
   username?: StringFilter;
 };

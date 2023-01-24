@@ -8,50 +8,87 @@ generator client {
 }
 
 model User {
-  addresses Address[]
-  createdAt DateTime  @default(now())
-  email     String    @unique
-  firstName String?
-  id        String    @id @default(cuid())
-  lastName  String?
-  orders    Order[]
-  password  String
-  phone     String
-  roles     Json
-  updatedAt DateTime  @updatedAt
-  username  String    @unique
+  apiToken        String?
+  createdAt       DateTime         @default(now())
+  customerGroupId Int?
+  dob             DateTime?
+  email           String           @unique
+  firstName       String?
+  gender          EnumUserGender[]
+  id              String           @id @default(cuid())
+  image           String?
+  isSuspended     Boolean?
+  isVerified      Boolean?
+  lastName        String?
+  mobileNumber    String
+  password        String
+  rememberToken   String?
+  roles           Json
+  status          Boolean?
+  token           String?
+  updatedAt       DateTime         @updatedAt
+  username        String           @unique
 }
 
-model Order {
-  createdAt  DateTime @default(now())
-  discount   Float?
-  id         String   @id @default(cuid())
-  product    Product  @relation(fields: [productId], references: [id])
-  productId  String
-  quantity   Int
-  totalPrice Int
-  updatedAt  DateTime @updatedAt
-  user       User[]
+model Role {
+  createdAt       DateTime @default(now())
+  id              String   @id @default(cuid())
+  roleDescription String
+  roleName        String
+  updatedAt       DateTime @updatedAt
 }
 
-model Address {
-  address_1 String
-  address_2 String?
-  city      String
+model UserRole {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
-  state     String
+  roleId    Int
   updatedAt DateTime @updatedAt
-  user      User[]
-  zip       Int?
+  userId    Int
+}
+
+model ProductCategory {
+  categoryId Int?
+  createdAt  DateTime @default(now())
+  id         String   @id @default(cuid())
+  productId  Int?
+  updatedAt  DateTime @updatedAt
+}
+
+model CustomerGroup {
+  code          String?
+  createdAt     DateTime @default(now())
+  id            String   @id @default(cuid())
+  isUserDefined Int
+  name          String?
+  updatedAt     DateTime @updatedAt
+}
+
+model Category {
+  categoryIconPath String?
+  createdAt        DateTime @default(now())
+  displayMode      String
+  id               String   @id @default(cuid())
+  image            String
+  lft              Int
+  parentId         Int?
+  position         Int
+  rgt              Int?
+  status           Int
+  updatedAt        DateTime @updatedAt
 }
 
 model Product {
-  createdAt   DateTime @default(now())
-  description String?
-  id          String   @id @default(cuid())
-  itemPrice   Float?
-  name        String?
-  orders      Order[]
-  updatedAt   DateTime @updatedAt
+  attributeFamilyId Int
+  createdAt         DateTime @default(now())
+  id                String   @id @default(cuid())
+  parentId          Int
+  sku               String   @unique
+  types             String
+  updatedAt         DateTime @updatedAt
+}
+
+enum EnumUserGender {
+  Male
+  Female
+  Other
 }

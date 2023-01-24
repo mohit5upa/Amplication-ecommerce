@@ -25,10 +25,6 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
-import { AddressFindManyArgs } from "../../address/base/AddressFindManyArgs";
-import { Address } from "../../address/base/Address";
-import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
-import { Order } from "../../order/base/Order";
 import { UserService } from "../user.service";
 
 @graphql.Resolver(() => User)
@@ -138,45 +134,5 @@ export class UserResolverBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Address])
-  @nestAccessControl.UseRoles({
-    resource: "Address",
-    action: "read",
-    possession: "any",
-  })
-  async addresses(
-    @graphql.Parent() parent: User,
-    @graphql.Args() args: AddressFindManyArgs
-  ): Promise<Address[]> {
-    const results = await this.service.findAddresses(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Order])
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "read",
-    possession: "any",
-  })
-  async orders(
-    @graphql.Parent() parent: User,
-    @graphql.Args() args: OrderFindManyArgs
-  ): Promise<Order[]> {
-    const results = await this.service.findOrders(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
   }
 }

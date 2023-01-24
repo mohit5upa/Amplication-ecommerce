@@ -11,16 +11,17 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { Address } from "../../address/base/Address";
 import {
-  ValidateNested,
+  IsString,
   IsOptional,
   IsDate,
-  IsString,
+  IsInt,
+  IsEnum,
+  IsBoolean,
   IsJSON,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Order } from "../../order/base/Order";
+import { EnumUserGender } from "./EnumUserGender";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
 
@@ -28,12 +29,14 @@ import { JsonValue } from "type-fest";
 class User {
   @ApiProperty({
     required: false,
-    type: () => [Address],
+    type: String,
   })
-  @ValidateNested()
-  @Type(() => Address)
+  @IsString()
   @IsOptional()
-  addresses?: Array<Address>;
+  @Field(() => String, {
+    nullable: true,
+  })
+  apiToken!: string | null;
 
   @ApiProperty({
     required: true,
@@ -42,6 +45,28 @@ class User {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  customerGroupId!: number | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  dob!: Date | null;
 
   @ApiProperty({
     required: true,
@@ -63,6 +88,20 @@ class User {
   firstName!: string | null;
 
   @ApiProperty({
+    required: false,
+    enum: EnumUserGender,
+    isArray: true,
+  })
+  @IsEnum(EnumUserGender, {
+    each: true,
+  })
+  @IsOptional()
+  @Field(() => [EnumUserGender], {
+    nullable: true,
+  })
+  gender?: Array<"Male" | "Female" | "Other">;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
@@ -79,16 +118,40 @@ class User {
   @Field(() => String, {
     nullable: true,
   })
-  lastName!: string | null;
+  image!: string | null;
 
   @ApiProperty({
     required: false,
-    type: () => [Order],
+    type: Boolean,
   })
-  @ValidateNested()
-  @Type(() => Order)
+  @IsBoolean()
   @IsOptional()
-  orders?: Array<Order>;
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isSuspended!: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  isVerified!: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  lastName!: string | null;
 
   @ApiProperty({
     required: true,
@@ -96,7 +159,18 @@ class User {
   })
   @IsString()
   @Field(() => String)
-  phone!: string;
+  mobileNumber!: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  rememberToken!: string | null;
 
   @ApiProperty({
     required: true,
@@ -104,6 +178,28 @@ class User {
   @IsJSON()
   @Field(() => GraphQLJSON)
   roles!: JsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  status!: boolean | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  token!: string | null;
 
   @ApiProperty({
     required: true,

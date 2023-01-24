@@ -25,7 +25,34 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  apiToken?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   createdAt?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  customerGroupId?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  dob?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -52,7 +79,43 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  gender?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   id?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  image?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  isSuspended?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  isVerified?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -70,6 +133,15 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  mobileNumber?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   password?: SortOrder;
 
   @ApiProperty({
@@ -79,7 +151,7 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  phone?: SortOrder;
+  rememberToken?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -89,6 +161,24 @@ class UserOrderByInput {
     nullable: true,
   })
   roles?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  status?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  token?: SortOrder;
 
   @ApiProperty({
     required: false,

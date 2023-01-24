@@ -11,38 +11,31 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsString,
-  IsOptional,
-  IsNumber,
-  ValidateNested,
-} from "class-validator";
-import { OrderUpdateManyWithoutProductsInput } from "./OrderUpdateManyWithoutProductsInput";
-import { Type } from "class-transformer";
+import { IsInt, IsOptional, IsString } from "class-validator";
 
 @InputType()
 class ProductUpdateInput {
   @ApiProperty({
     required: false,
-    type: String,
+    type: Number,
   })
-  @IsString()
+  @IsInt()
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => Number, {
     nullable: true,
   })
-  description?: string | null;
+  attributeFamilyId?: number;
 
   @ApiProperty({
     required: false,
     type: Number,
   })
-  @IsNumber()
+  @IsInt()
   @IsOptional()
   @Field(() => Number, {
     nullable: true,
   })
-  itemPrice?: number | null;
+  parentId?: number;
 
   @ApiProperty({
     required: false,
@@ -53,19 +46,18 @@ class ProductUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  name?: string | null;
+  sku?: string;
 
   @ApiProperty({
     required: false,
-    type: () => OrderUpdateManyWithoutProductsInput,
+    type: String,
   })
-  @ValidateNested()
-  @Type(() => OrderUpdateManyWithoutProductsInput)
+  @IsString()
   @IsOptional()
-  @Field(() => OrderUpdateManyWithoutProductsInput, {
+  @Field(() => String, {
     nullable: true,
   })
-  orders?: OrderUpdateManyWithoutProductsInput;
+  types?: string;
 }
 
 export { ProductUpdateInput };
