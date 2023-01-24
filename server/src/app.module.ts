@@ -2,6 +2,8 @@ import { Module, Scope } from "@nestjs/common";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
+import { RoleModule } from "./role/role.module";
+import { UserRoleModule } from "./userRole/userRole.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -16,6 +18,8 @@ import { GraphQLModule } from "@nestjs/graphql";
   controllers: [],
   imports: [
     UserModule,
+    RoleModule,
+    UserRoleModule,
     ACLModule,
     AuthModule,
     HealthModule,
