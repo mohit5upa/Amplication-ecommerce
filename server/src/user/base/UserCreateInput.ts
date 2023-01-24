@@ -135,12 +135,15 @@ class UserCreateInput {
   lastName?: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  mobileNumber!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  mobileNumber?: string | null;
 
   @ApiProperty({
     required: true,
@@ -169,15 +172,12 @@ class UserCreateInput {
   roles!: InputJsonValue;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: Boolean,
   })
   @IsBoolean()
-  @IsOptional()
-  @Field(() => Boolean, {
-    nullable: true,
-  })
-  status?: boolean | null;
+  @Field(() => Boolean)
+  status!: boolean;
 
   @ApiProperty({
     required: false,

@@ -151,12 +151,15 @@ class User {
   lastName!: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  mobileNumber!: string;
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  mobileNumber!: string | null;
 
   @ApiProperty({
     required: false,
@@ -177,15 +180,12 @@ class User {
   roles!: JsonValue;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: Boolean,
   })
   @IsBoolean()
-  @IsOptional()
-  @Field(() => Boolean, {
-    nullable: true,
-  })
-  status!: boolean | null;
+  @Field(() => Boolean)
+  status!: boolean;
 
   @ApiProperty({
     required: false,

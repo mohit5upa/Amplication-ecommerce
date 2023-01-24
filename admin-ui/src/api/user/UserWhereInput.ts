@@ -3,6 +3,7 @@ import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
+import { BooleanFilter } from "../../util/BooleanFilter";
 
 export type UserWhereInput = {
   apiToken?: StringNullableFilter;
@@ -16,9 +17,9 @@ export type UserWhereInput = {
   isSuspended?: BooleanNullableFilter;
   isVerified?: BooleanNullableFilter;
   lastName?: StringNullableFilter;
-  mobileNumber?: StringFilter;
+  mobileNumber?: StringNullableFilter;
   rememberToken?: StringNullableFilter;
-  status?: BooleanNullableFilter;
+  status?: BooleanFilter;
   token?: StringNullableFilter;
   username?: StringFilter;
 };

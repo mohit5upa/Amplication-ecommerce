@@ -146,7 +146,7 @@ class UserUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  mobileNumber?: string;
+  mobileNumber?: string | null;
 
   @ApiProperty({
     required: false,
@@ -189,7 +189,7 @@ class UserUpdateInput {
   @Field(() => Boolean, {
     nullable: true,
   })
-  status?: boolean | null;
+  status?: boolean;
 
   @ApiProperty({
     required: false,
