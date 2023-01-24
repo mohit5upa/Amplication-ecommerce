@@ -9,6 +9,14 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
+import { RoleList } from "./role/RoleList";
+import { RoleCreate } from "./role/RoleCreate";
+import { RoleEdit } from "./role/RoleEdit";
+import { RoleShow } from "./role/RoleShow";
+import { UserRoleList } from "./userRole/UserRoleList";
+import { UserRoleCreate } from "./userRole/UserRoleCreate";
+import { UserRoleEdit } from "./userRole/UserRoleEdit";
+import { UserRoleShow } from "./userRole/UserRoleShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -41,6 +49,20 @@ const App = (): React.ReactElement => {
           edit={UserEdit}
           create={UserCreate}
           show={UserShow}
+        />
+        <Resource
+          name="Role"
+          list={RoleList}
+          edit={RoleEdit}
+          create={RoleCreate}
+          show={RoleShow}
+        />
+        <Resource
+          name="UserRole"
+          list={UserRoleList}
+          edit={UserRoleEdit}
+          create={UserRoleCreate}
+          show={UserRoleShow}
         />
       </Admin>
     </div>

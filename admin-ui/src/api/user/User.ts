@@ -1,4 +1,5 @@
 import { JsonValue } from "type-fest";
+import { UserRole } from "../userRole/UserRole";
 
 export type User = {
   apiToken: string | null;
@@ -20,4 +21,5 @@ export type User = {
   token: string | null;
   updatedAt: Date;
   username: string;
+  userRoles?: Array<UserRole>;
 };

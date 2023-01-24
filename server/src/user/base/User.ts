@@ -11,6 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+
 import {
   IsString,
   IsOptional,
@@ -19,11 +20,14 @@ import {
   IsEnum,
   IsBoolean,
   IsJSON,
+  ValidateNested,
 } from "class-validator";
+
 import { Type } from "class-transformer";
 import { EnumUserGender } from "./EnumUserGender";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { UserRole } from "../../userRole/base/UserRole";
 
 @ObjectType()
 class User {
@@ -213,6 +217,15 @@ class User {
   @IsString()
   @Field(() => String)
   username!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => [UserRole],
+  })
+  @ValidateNested()
+  @Type(() => UserRole)
+  @IsOptional()
+  userRoles?: Array<UserRole>;
 }
 
 export { User };
