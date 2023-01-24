@@ -1,5 +1,4 @@
 import { InputJsonValue } from "../../types";
-import { UserRoleUpdateManyWithoutUsersInput } from "./UserRoleUpdateManyWithoutUsersInput";
 
 export type UserUpdateInput = {
   apiToken?: string | null;
@@ -19,5 +18,4 @@ export type UserUpdateInput = {
   status?: boolean | null;
   token?: string | null;
   username?: string;
-  userRoles?: UserRoleUpdateManyWithoutUsersInput;
 };

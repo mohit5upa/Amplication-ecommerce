@@ -25,8 +25,6 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
-import { UserRoleFindManyArgs } from "../../userRole/base/UserRoleFindManyArgs";
-import { UserRole } from "../../userRole/base/UserRole";
 import { UserService } from "../user.service";
 
 @graphql.Resolver(() => User)
@@ -136,25 +134,5 @@ export class UserResolverBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [UserRole])
-  @nestAccessControl.UseRoles({
-    resource: "UserRole",
-    action: "read",
-    possession: "any",
-  })
-  async userRoles(
-    @graphql.Parent() parent: User,
-    @graphql.Args() args: UserRoleFindManyArgs
-  ): Promise<UserRole[]> {
-    const results = await this.service.findUserRoles(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
   }
 }
