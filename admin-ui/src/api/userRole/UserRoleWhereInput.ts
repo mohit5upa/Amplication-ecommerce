@@ -1,9 +1,9 @@
 import { StringFilter } from "../../util/StringFilter";
-import { RoleListRelationFilter } from "../role/RoleListRelationFilter";
+import { RoleWhereUniqueInput } from "../role/RoleWhereUniqueInput";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type UserRoleWhereInput = {
   id?: StringFilter;
-  roleId?: RoleListRelationFilter;
+  roleId?: RoleWhereUniqueInput;
   userId?: UserWhereUniqueInput;
 };

@@ -34,7 +34,7 @@ model User {
 model UserRole {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
-  roleId    Role[]
+  roleId    Role?
   updatedAt DateTime @updatedAt
   userId    User     @relation(fields: [userIdId], references: [id])
   userIdId  String
@@ -47,7 +47,7 @@ model Role {
   roleName        String
   updatedAt       DateTime  @updatedAt
   userRole        UserRole? @relation(fields: [userRoleId], references: [id])
-  userRoleId      String?
+  userRoleId      String?   @unique
 }
 
 enum EnumUserGender {

@@ -272,6 +272,13 @@ export class UserControllerBase {
       select: {
         createdAt: true,
         id: true,
+
+        roleId: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
 
         userId: {
