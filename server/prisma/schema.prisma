@@ -9,13 +9,13 @@ generator client {
 
 model User {
   apiToken        String?
-  createdAt       DateTime         @default(now())
+  createdAt       DateTime        @default(now())
   customerGroupId Int?
   dob             DateTime?
-  email           String           @unique
+  email           String          @unique
   firstName       String?
-  gender          EnumUserGender[]
-  id              String           @id @default(cuid())
+  gender          EnumUserGender?
+  id              String          @id @default(cuid())
   image           String?
   isSuspended     Boolean?
   isVerified      Boolean?
@@ -26,8 +26,8 @@ model User {
   roles           Json
   status          Boolean?
   token           String?
-  updatedAt       DateTime         @updatedAt
-  username        String           @unique
+  updatedAt       DateTime        @updatedAt
+  username        String          @unique
 }
 
 enum EnumUserGender {

@@ -10,6 +10,7 @@ export type UserWhereInput = {
   dob?: DateTimeNullableFilter;
   email?: StringFilter;
   firstName?: StringNullableFilter;
+  gender?: "Male" | "Female" | "Other";
   id?: StringFilter;
   image?: StringNullableFilter;
   isSuspended?: BooleanNullableFilter;
