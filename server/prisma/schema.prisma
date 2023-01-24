@@ -28,25 +28,14 @@ model User {
   token           String?
   updatedAt       DateTime        @updatedAt
   username        String          @unique
-  userRoles       UserRole[]
 }
 
 model Role {
-  createdAt       DateTime  @default(now())
-  id              String    @id @default(cuid())
+  createdAt       DateTime @default(now())
+  id              String   @id @default(cuid())
   roleDescription String
   roleName        String
-  updatedAt       DateTime  @updatedAt
-  userRole        UserRole? @relation(fields: [userRoleId], references: [id])
-  userRoleId      String?
-}
-
-model UserRole {
-  createdAt DateTime @default(now())
-  id        String   @id @default(cuid())
-  roles     Role[]
-  updatedAt DateTime @updatedAt
-  user      User[]
+  updatedAt       DateTime @updatedAt
 }
 
 enum EnumUserGender {
