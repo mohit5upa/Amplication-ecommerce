@@ -19,20 +19,17 @@ import {
   IsInt,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Customer } from "../../customer/base/Customer";
+import { User } from "../../user/base/User";
 
 @ObjectType()
 class Address {
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  address_1!: string | null;
+  @Field(() => String)
+  address_1!: string;
 
   @ApiProperty({
     required: false,
@@ -46,15 +43,12 @@ class Address {
   address_2!: string | null;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  city!: string | null;
+  @Field(() => String)
+  city!: string;
 
   @ApiProperty({
     required: true,
@@ -65,15 +59,6 @@ class Address {
   createdAt!: Date;
 
   @ApiProperty({
-    required: false,
-    type: () => [Customer],
-  })
-  @ValidateNested()
-  @Type(() => Customer)
-  @IsOptional()
-  customers?: Array<Customer>;
-
-  @ApiProperty({
     required: true,
     type: String,
   })
@@ -82,15 +67,12 @@ class Address {
   id!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  state!: string | null;
+  @Field(() => String)
+  state!: string;
 
   @ApiProperty({
     required: true,
@@ -99,6 +81,15 @@ class Address {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
+
+  @ApiProperty({
+    required: true,
+    type: () => [User],
+  })
+  @ValidateNested()
+  @Type(() => User)
+  @IsOptional()
+  user?: Array<User>;
 
   @ApiProperty({
     required: false,

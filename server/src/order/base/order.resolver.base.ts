@@ -25,7 +25,8 @@ import { DeleteOrderArgs } from "./DeleteOrderArgs";
 import { OrderFindManyArgs } from "./OrderFindManyArgs";
 import { OrderFindUniqueArgs } from "./OrderFindUniqueArgs";
 import { Order } from "./Order";
-import { Customer } from "../../customer/base/Customer";
+import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
+import { User } from "../../user/base/User";
 import { Product } from "../../product/base/Product";
 import { OrderService } from "../order.service";
 
@@ -97,17 +98,9 @@ export class OrderResolverBase {
       data: {
         ...args.data,
 
-        customer: args.data.customer
-          ? {
-              connect: args.data.customer,
-            }
-          : undefined,
-
-        product: args.data.product
-          ? {
-              connect: args.data.product,
-            }
-          : undefined,
+        product: {
+          connect: args.data.product,
+        },
       },
     });
   }
@@ -128,17 +121,9 @@ export class OrderResolverBase {
         data: {
           ...args.data,
 
-          customer: args.data.customer
-            ? {
-                connect: args.data.customer,
-              }
-            : undefined,
-
-          product: args.data.product
-            ? {
-                connect: args.data.product,
-              }
-            : undefined,
+          product: {
+            connect: args.data.product,
+          },
         },
       });
     } catch (error) {
@@ -173,19 +158,23 @@ export class OrderResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => Customer, { nullable: true })
+  @graphql.ResolveField(() => [User])
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "User",
     action: "read",
     possession: "any",
   })
-  async customer(@graphql.Parent() parent: Order): Promise<Customer | null> {
-    const result = await this.service.getCustomer(parent.id);
+  async user(
+    @graphql.Parent() parent: Order,
+    @graphql.Args() args: UserFindManyArgs
+  ): Promise<User[]> {
+    const results = await this.service.findUser(parent.id, args);
 
-    if (!result) {
-      return null;
+    if (!results) {
+      return [];
     }
-    return result;
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

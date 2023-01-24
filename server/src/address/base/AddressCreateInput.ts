@@ -12,21 +12,18 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, ValidateNested, IsInt } from "class-validator";
-import { CustomerCreateNestedManyWithoutAddressesInput } from "./CustomerCreateNestedManyWithoutAddressesInput";
+import { UserCreateNestedManyWithoutAddressesInput } from "./UserCreateNestedManyWithoutAddressesInput";
 import { Type } from "class-transformer";
 
 @InputType()
 class AddressCreateInput {
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  address_1?: string | null;
+  @Field(() => String)
+  address_1!: string;
 
   @ApiProperty({
     required: false,
@@ -40,38 +37,32 @@ class AddressCreateInput {
   address_2?: string | null;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  city?: string | null;
+  @Field(() => String)
+  city!: string;
 
   @ApiProperty({
-    required: false,
-    type: () => CustomerCreateNestedManyWithoutAddressesInput,
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  state!: string;
+
+  @ApiProperty({
+    required: true,
+    type: () => UserCreateNestedManyWithoutAddressesInput,
   })
   @ValidateNested()
-  @Type(() => CustomerCreateNestedManyWithoutAddressesInput)
+  @Type(() => UserCreateNestedManyWithoutAddressesInput)
   @IsOptional()
-  @Field(() => CustomerCreateNestedManyWithoutAddressesInput, {
+  @Field(() => UserCreateNestedManyWithoutAddressesInput, {
     nullable: true,
   })
-  customers?: CustomerCreateNestedManyWithoutAddressesInput;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  state?: string | null;
+  user?: UserCreateNestedManyWithoutAddressesInput;
 
   @ApiProperty({
     required: false,
