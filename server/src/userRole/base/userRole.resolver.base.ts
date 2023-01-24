@@ -25,6 +25,9 @@ import { DeleteUserRoleArgs } from "./DeleteUserRoleArgs";
 import { UserRoleFindManyArgs } from "./UserRoleFindManyArgs";
 import { UserRoleFindUniqueArgs } from "./UserRoleFindUniqueArgs";
 import { UserRole } from "./UserRole";
+import { RoleFindManyArgs } from "../../role/base/RoleFindManyArgs";
+import { Role } from "../../role/base/Role";
+import { User } from "../../user/base/User";
 import { UserRoleService } from "../userRole.service";
 
 @graphql.Resolver(() => UserRole)
@@ -96,7 +99,13 @@ export class UserRoleResolverBase {
   ): Promise<UserRole> {
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        userId: {
+          connect: args.data.userId,
+        },
+      },
     });
   }
 
@@ -113,7 +122,13 @@ export class UserRoleResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          userId: {
+            connect: args.data.userId,
+          },
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -144,5 +159,41 @@ export class UserRoleResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Role])
+  @nestAccessControl.UseRoles({
+    resource: "Role",
+    action: "read",
+    possession: "any",
+  })
+  async roleId(
+    @graphql.Parent() parent: UserRole,
+    @graphql.Args() args: RoleFindManyArgs
+  ): Promise<Role[]> {
+    const results = await this.service.findRoleId(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async userId(@graphql.Parent() parent: UserRole): Promise<User | null> {
+    const result = await this.service.getUserId(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

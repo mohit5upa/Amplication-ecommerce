@@ -10,46 +10,37 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
+import { RoleWhereUniqueInput } from "../../role/base/RoleWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, ValidateNested } from "class-validator";
-import { UserRoleWhereUniqueInput } from "../../userRole/base/UserRoleWhereUniqueInput";
-import { Type } from "class-transformer";
 
 @InputType()
-class RoleUpdateInput {
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
+class RoleUpdateManyWithoutUserRolesInput {
+  @Field(() => [RoleWhereUniqueInput], {
     nullable: true,
   })
-  roleDescription?: string;
+  @ApiProperty({
+    required: false,
+    type: () => [RoleWhereUniqueInput],
+  })
+  connect?: Array<RoleWhereUniqueInput>;
 
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
+  @Field(() => [RoleWhereUniqueInput], {
     nullable: true,
   })
-  roleName?: string;
+  @ApiProperty({
+    required: false,
+    type: () => [RoleWhereUniqueInput],
+  })
+  disconnect?: Array<RoleWhereUniqueInput>;
 
-  @ApiProperty({
-    required: false,
-    type: () => UserRoleWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => UserRoleWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserRoleWhereUniqueInput, {
+  @Field(() => [RoleWhereUniqueInput], {
     nullable: true,
   })
-  userRole?: UserRoleWhereUniqueInput | null;
+  @ApiProperty({
+    required: false,
+    type: () => [RoleWhereUniqueInput],
+  })
+  set?: Array<RoleWhereUniqueInput>;
 }
 
-export { RoleUpdateInput };
+export { RoleUpdateManyWithoutUserRolesInput };

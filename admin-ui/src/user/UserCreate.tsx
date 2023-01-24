@@ -10,8 +10,10 @@ import {
   SelectArrayInput,
   BooleanInput,
   PasswordInput,
+  ReferenceArrayInput,
 } from "react-admin";
 
+import { UserRoleTitle } from "../userRole/UserRoleTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
 export const UserCreate = (props: CreateProps): React.ReactElement => {
@@ -54,6 +56,14 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
         <BooleanInput label="status" source="status" />
         <TextInput label="token" source="token" />
         <TextInput label="Username" source="username" />
+        <ReferenceArrayInput
+          source="userRoles"
+          reference="UserRole"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={UserRoleTitle} />
+        </ReferenceArrayInput>
       </SimpleForm>
     </Create>
   );
