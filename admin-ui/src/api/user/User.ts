@@ -13,10 +13,10 @@ export type User = {
   isSuspended: boolean | null;
   isVerified: boolean | null;
   lastName: string | null;
-  mobileNumber: string;
+  mobileNumber: string | null;
   rememberToken: string | null;
   roles: JsonValue;
-  status: boolean | null;
+  status: boolean;
   token: string | null;
   updatedAt: Date;
   username: string;

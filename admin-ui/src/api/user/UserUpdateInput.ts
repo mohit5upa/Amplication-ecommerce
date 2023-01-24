@@ -11,11 +11,11 @@ export type UserUpdateInput = {
   isSuspended?: boolean | null;
   isVerified?: boolean | null;
   lastName?: string | null;
-  mobileNumber?: string;
+  mobileNumber?: string | null;
   password?: string;
   rememberToken?: string | null;
   roles?: InputJsonValue;
-  status?: boolean | null;
+  status?: boolean;
   token?: string | null;
   username?: string;
 };

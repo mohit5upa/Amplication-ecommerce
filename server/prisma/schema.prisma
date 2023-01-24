@@ -20,11 +20,11 @@ model User {
   isSuspended     Boolean?
   isVerified      Boolean?
   lastName        String?
-  mobileNumber    String
+  mobileNumber    String?
   password        String
   rememberToken   String?
   roles           Json
-  status          Boolean?
+  status          Boolean
   token           String?
   updatedAt       DateTime        @updatedAt
   username        String          @unique
