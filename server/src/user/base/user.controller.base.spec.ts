@@ -19,48 +19,84 @@ import { UserService } from "../user.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  apiToken: "exampleApiToken",
   createdAt: new Date(),
+  customerGroupId: 42,
+  dob: new Date(),
   email: "exampleEmail",
   firstName: "exampleFirstName",
   id: "exampleId",
+  image: "exampleImage",
+  isSuspended: "true",
+  isVerified: "true",
   lastName: "exampleLastName",
+  mobileNumber: "exampleMobileNumber",
   password: "examplePassword",
-  phone: "examplePhone",
+  rememberToken: "exampleRememberToken",
+  status: "true",
+  token: "exampleToken",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
 const CREATE_RESULT = {
+  apiToken: "exampleApiToken",
   createdAt: new Date(),
+  customerGroupId: 42,
+  dob: new Date(),
   email: "exampleEmail",
   firstName: "exampleFirstName",
   id: "exampleId",
+  image: "exampleImage",
+  isSuspended: "true",
+  isVerified: "true",
   lastName: "exampleLastName",
+  mobileNumber: "exampleMobileNumber",
   password: "examplePassword",
-  phone: "examplePhone",
+  rememberToken: "exampleRememberToken",
+  status: "true",
+  token: "exampleToken",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
 const FIND_MANY_RESULT = [
   {
+    apiToken: "exampleApiToken",
     createdAt: new Date(),
+    customerGroupId: 42,
+    dob: new Date(),
     email: "exampleEmail",
     firstName: "exampleFirstName",
     id: "exampleId",
+    image: "exampleImage",
+    isSuspended: "true",
+    isVerified: "true",
     lastName: "exampleLastName",
+    mobileNumber: "exampleMobileNumber",
     password: "examplePassword",
-    phone: "examplePhone",
+    rememberToken: "exampleRememberToken",
+    status: "true",
+    token: "exampleToken",
     updatedAt: new Date(),
     username: "exampleUsername",
   },
 ];
 const FIND_ONE_RESULT = {
+  apiToken: "exampleApiToken",
   createdAt: new Date(),
+  customerGroupId: 42,
+  dob: new Date(),
   email: "exampleEmail",
   firstName: "exampleFirstName",
   id: "exampleId",
+  image: "exampleImage",
+  isSuspended: "true",
+  isVerified: "true",
   lastName: "exampleLastName",
+  mobileNumber: "exampleMobileNumber",
   password: "examplePassword",
-  phone: "examplePhone",
+  rememberToken: "exampleRememberToken",
+  status: "true",
+  token: "exampleToken",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
@@ -148,6 +184,7 @@ describe("User", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        dob: CREATE_RESULT.dob.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -160,6 +197,7 @@ describe("User", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          dob: FIND_MANY_RESULT[0].dob.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -183,6 +221,7 @@ describe("User", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        dob: FIND_ONE_RESULT.dob.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -196,6 +235,7 @@ describe("User", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        dob: CREATE_RESULT.dob.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       })
       .then(function () {

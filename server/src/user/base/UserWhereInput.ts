@@ -11,26 +11,48 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AddressListRelationFilter } from "../../address/base/AddressListRelationFilter";
-import { ValidateNested, IsOptional } from "class-validator";
-import { Type } from "class-transformer";
-import { StringFilter } from "../../util/StringFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
+import { Type } from "class-transformer";
+import { IsOptional } from "class-validator";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 
 @InputType()
 class UserWhereInput {
   @ApiProperty({
     required: false,
-    type: () => AddressListRelationFilter,
+    type: StringNullableFilter,
   })
-  @ValidateNested()
-  @Type(() => AddressListRelationFilter)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => AddressListRelationFilter, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  addresses?: AddressListRelationFilter;
+  apiToken?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  customerGroupId?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  dob?: DateTimeNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -74,19 +96,40 @@ class UserWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  lastName?: StringNullableFilter;
+  image?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: () => OrderListRelationFilter,
+    type: BooleanNullableFilter,
   })
-  @ValidateNested()
-  @Type(() => OrderListRelationFilter)
+  @Type(() => BooleanNullableFilter)
   @IsOptional()
-  @Field(() => OrderListRelationFilter, {
+  @Field(() => BooleanNullableFilter, {
     nullable: true,
   })
-  orders?: OrderListRelationFilter;
+  isSuspended?: BooleanNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: BooleanNullableFilter,
+  })
+  @Type(() => BooleanNullableFilter)
+  @IsOptional()
+  @Field(() => BooleanNullableFilter, {
+    nullable: true,
+  })
+  isVerified?: BooleanNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  lastName?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -97,7 +140,40 @@ class UserWhereInput {
   @Field(() => StringFilter, {
     nullable: true,
   })
-  phone?: StringFilter;
+  mobileNumber?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  rememberToken?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: BooleanNullableFilter,
+  })
+  @Type(() => BooleanNullableFilter)
+  @IsOptional()
+  @Field(() => BooleanNullableFilter, {
+    nullable: true,
+  })
+  status?: BooleanNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  token?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

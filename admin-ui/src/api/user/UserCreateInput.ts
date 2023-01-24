@@ -1,15 +1,21 @@
-import { AddressCreateNestedManyWithoutUsersInput } from "./AddressCreateNestedManyWithoutUsersInput";
-import { OrderCreateNestedManyWithoutUsersInput } from "./OrderCreateNestedManyWithoutUsersInput";
 import { InputJsonValue } from "../../types";
 
 export type UserCreateInput = {
-  addresses?: AddressCreateNestedManyWithoutUsersInput;
+  apiToken?: string | null;
+  customerGroupId?: number | null;
+  dob?: Date | null;
   email: string;
   firstName?: string | null;
+  gender?: Array<"Male" | "Female" | "Other">;
+  image?: string | null;
+  isSuspended?: boolean | null;
+  isVerified?: boolean | null;
   lastName?: string | null;
-  orders?: OrderCreateNestedManyWithoutUsersInput;
+  mobileNumber: string;
   password: string;
-  phone: string;
+  rememberToken?: string | null;
   roles: InputJsonValue;
+  status?: boolean | null;
+  token?: string | null;
   username: string;
 };

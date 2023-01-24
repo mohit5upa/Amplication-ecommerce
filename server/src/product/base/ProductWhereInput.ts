@@ -11,25 +11,23 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { IntFilter } from "../../util/IntFilter";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
+import { IsOptional } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
-import { FloatNullableFilter } from "../../util/FloatNullableFilter";
-import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
 
 @InputType()
 class ProductWhereInput {
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: IntFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => IntFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => IntFilter, {
     nullable: true,
   })
-  description?: StringNullableFilter;
+  attributeFamilyId?: IntFilter;
 
   @ApiProperty({
     required: false,
@@ -44,37 +42,36 @@ class ProductWhereInput {
 
   @ApiProperty({
     required: false,
-    type: FloatNullableFilter,
+    type: IntFilter,
   })
-  @Type(() => FloatNullableFilter)
+  @Type(() => IntFilter)
   @IsOptional()
-  @Field(() => FloatNullableFilter, {
+  @Field(() => IntFilter, {
     nullable: true,
   })
-  itemPrice?: FloatNullableFilter;
+  parentId?: IntFilter;
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: StringFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => StringFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
   })
-  name?: StringNullableFilter;
+  sku?: StringFilter;
 
   @ApiProperty({
     required: false,
-    type: () => OrderListRelationFilter,
+    type: StringFilter,
   })
-  @ValidateNested()
-  @Type(() => OrderListRelationFilter)
+  @Type(() => StringFilter)
   @IsOptional()
-  @Field(() => OrderListRelationFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
   })
-  orders?: OrderListRelationFilter;
+  types?: StringFilter;
 }
 
 export { ProductWhereInput };

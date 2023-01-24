@@ -1,8 +1,6 @@
-import { OrderCreateNestedManyWithoutProductsInput } from "./OrderCreateNestedManyWithoutProductsInput";
-
 export type ProductCreateInput = {
-  description?: string | null;
-  itemPrice?: number | null;
-  name?: string | null;
-  orders?: OrderCreateNestedManyWithoutProductsInput;
+  attributeFamilyId: number;
+  parentId: number;
+  sku: string;
+  types: string;
 };

@@ -11,61 +11,41 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsString,
-  IsOptional,
-  IsNumber,
-  ValidateNested,
-} from "class-validator";
-import { OrderCreateNestedManyWithoutProductsInput } from "./OrderCreateNestedManyWithoutProductsInput";
-import { Type } from "class-transformer";
+import { IsInt, IsString } from "class-validator";
 
 @InputType()
 class ProductCreateInput {
   @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  description?: string | null;
-
-  @ApiProperty({
-    required: false,
+    required: true,
     type: Number,
   })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  itemPrice?: number | null;
+  @IsInt()
+  @Field(() => Number)
+  attributeFamilyId!: number;
 
   @ApiProperty({
-    required: false,
+    required: true,
+    type: Number,
+  })
+  @IsInt()
+  @Field(() => Number)
+  parentId!: number;
+
+  @ApiProperty({
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  name?: string | null;
+  @Field(() => String)
+  sku!: string;
 
   @ApiProperty({
-    required: false,
-    type: () => OrderCreateNestedManyWithoutProductsInput,
+    required: true,
+    type: String,
   })
-  @ValidateNested()
-  @Type(() => OrderCreateNestedManyWithoutProductsInput)
-  @IsOptional()
-  @Field(() => OrderCreateNestedManyWithoutProductsInput, {
-    nullable: true,
-  })
-  orders?: OrderCreateNestedManyWithoutProductsInput;
+  @IsString()
+  @Field(() => String)
+  types!: string;
 }
 
 export { ProductCreateInput };

@@ -11,18 +11,19 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsDate,
-  IsString,
-  IsOptional,
-  IsNumber,
-  ValidateNested,
-} from "class-validator";
+import { IsInt, IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
-import { Order } from "../../order/base/Order";
 
 @ObjectType()
 class Product {
+  @ApiProperty({
+    required: true,
+    type: Number,
+  })
+  @IsInt()
+  @Field(() => Number)
+  attributeFamilyId!: number;
+
   @ApiProperty({
     required: true,
   })
@@ -30,17 +31,6 @@ class Product {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  description!: string | null;
 
   @ApiProperty({
     required: true,
@@ -51,35 +41,28 @@ class Product {
   id!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: Number,
   })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  itemPrice!: number | null;
+  @IsInt()
+  @Field(() => Number)
+  parentId!: number;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  name!: string | null;
+  @Field(() => String)
+  sku!: string;
 
   @ApiProperty({
-    required: false,
-    type: () => [Order],
+    required: true,
+    type: String,
   })
-  @ValidateNested()
-  @Type(() => Order)
-  @IsOptional()
-  orders?: Array<Order>;
+  @IsString()
+  @Field(() => String)
+  types!: string;
 
   @ApiProperty({
     required: true,

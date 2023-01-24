@@ -1,11 +1,9 @@
-import { Order } from "../order/Order";
-
 export type Product = {
+  attributeFamilyId: number;
   createdAt: Date;
-  description: string | null;
   id: string;
-  itemPrice: number | null;
-  name: string | null;
-  orders?: Array<Order>;
+  parentId: number;
+  sku: string;
+  types: string;
   updatedAt: Date;
 };
