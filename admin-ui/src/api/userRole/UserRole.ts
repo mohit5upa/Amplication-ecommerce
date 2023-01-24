@@ -6,5 +6,5 @@ export type UserRole = {
   id: string;
   role?: Role | null;
   updatedAt: Date;
-  user?: Array<User>;
+  user?: User | null;
 };

@@ -25,9 +25,8 @@ import { DeleteUserRoleArgs } from "./DeleteUserRoleArgs";
 import { UserRoleFindManyArgs } from "./UserRoleFindManyArgs";
 import { UserRoleFindUniqueArgs } from "./UserRoleFindUniqueArgs";
 import { UserRole } from "./UserRole";
-import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
-import { User } from "../../user/base/User";
 import { Role } from "../../role/base/Role";
+import { User } from "../../user/base/User";
 import { UserRoleService } from "../userRole.service";
 
 @graphql.Resolver(() => UserRole)
@@ -107,6 +106,12 @@ export class UserRoleResolverBase {
               connect: args.data.role,
             }
           : undefined,
+
+        user: args.data.user
+          ? {
+              connect: args.data.user,
+            }
+          : undefined,
       },
     });
   }
@@ -130,6 +135,12 @@ export class UserRoleResolverBase {
           role: args.data.role
             ? {
                 connect: args.data.role,
+              }
+            : undefined,
+
+          user: args.data.user
+            ? {
+                connect: args.data.user,
               }
             : undefined,
         },
@@ -166,26 +177,6 @@ export class UserRoleResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [User])
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
-  })
-  async user(
-    @graphql.Parent() parent: UserRole,
-    @graphql.Args() args: UserFindManyArgs
-  ): Promise<User[]> {
-    const results = await this.service.findUser(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Role, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "Role",
@@ -194,6 +185,22 @@ export class UserRoleResolverBase {
   })
   async role(@graphql.Parent() parent: UserRole): Promise<Role | null> {
     const result = await this.service.getRole(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async user(@graphql.Parent() parent: UserRole): Promise<User | null> {
+    const result = await this.service.getUser(parent.id);
 
     if (!result) {
       return null;
