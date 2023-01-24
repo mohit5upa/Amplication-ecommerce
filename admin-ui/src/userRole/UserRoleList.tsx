@@ -8,6 +8,7 @@ import {
   ReferenceField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
+import { ROLE_TITLE_FIELD } from "../role/RoleTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const UserRoleList = (props: ListProps): React.ReactElement => {
@@ -22,6 +23,9 @@ export const UserRoleList = (props: ListProps): React.ReactElement => {
       <Datagrid rowClick="show">
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
+        <ReferenceField label="roleId" source="role.id" reference="Role">
+          <TextField source={ROLE_TITLE_FIELD} />
+        </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceField label="userId" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />

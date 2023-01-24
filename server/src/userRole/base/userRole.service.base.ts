@@ -47,15 +47,12 @@ export class UserRoleServiceBase {
     return this.prisma.userRole.delete(args);
   }
 
-  async findRoleId(
-    parentId: string,
-    args: Prisma.RoleFindManyArgs
-  ): Promise<Role[]> {
+  async getRoleId(parentId: string): Promise<Role | null> {
     return this.prisma.userRole
-      .findUniqueOrThrow({
+      .findUnique({
         where: { id: parentId },
       })
-      .roleId(args);
+      .roleId();
   }
 
   async getUserId(parentId: string): Promise<User | null> {

@@ -1,7 +1,7 @@
-import { RoleCreateNestedManyWithoutUserRolesInput } from "./RoleCreateNestedManyWithoutUserRolesInput";
+import { RoleWhereUniqueInput } from "../role/RoleWhereUniqueInput";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type UserRoleCreateInput = {
-  roleId?: RoleCreateNestedManyWithoutUserRolesInput;
+  roleId: RoleWhereUniqueInput | null;
   userId: UserWhereUniqueInput;
 };

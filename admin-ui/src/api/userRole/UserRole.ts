@@ -4,7 +4,7 @@ import { User } from "../user/User";
 export type UserRole = {
   createdAt: Date;
   id: string;
-  roleId?: Array<Role>;
+  roleId?: Role | null;
   updatedAt: Date;
   userId?: User;
 };

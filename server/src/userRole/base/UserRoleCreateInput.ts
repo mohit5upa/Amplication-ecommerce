@@ -11,8 +11,8 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { RoleCreateNestedManyWithoutUserRolesInput } from "./RoleCreateNestedManyWithoutUserRolesInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { RoleWhereUniqueInput } from "../../role/base/RoleWhereUniqueInput";
+import { ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
@@ -20,15 +20,12 @@ import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 class UserRoleCreateInput {
   @ApiProperty({
     required: true,
-    type: () => RoleCreateNestedManyWithoutUserRolesInput,
+    type: () => RoleWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => RoleCreateNestedManyWithoutUserRolesInput)
-  @IsOptional()
-  @Field(() => RoleCreateNestedManyWithoutUserRolesInput, {
-    nullable: true,
-  })
-  roleId?: RoleCreateNestedManyWithoutUserRolesInput;
+  @Type(() => RoleWhereUniqueInput)
+  @Field(() => RoleWhereUniqueInput)
+  roleId!: RoleWhereUniqueInput | null;
 
   @ApiProperty({
     required: true,
