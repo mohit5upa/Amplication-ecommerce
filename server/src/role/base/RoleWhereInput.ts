@@ -13,7 +13,8 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { IsOptional, ValidateNested } from "class-validator";
+import { UserRoleListRelationFilter } from "../../userRole/base/UserRoleListRelationFilter";
 
 @InputType()
 class RoleWhereInput {
@@ -49,6 +50,18 @@ class RoleWhereInput {
     nullable: true,
   })
   roleName?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserRoleListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => UserRoleListRelationFilter)
+  @IsOptional()
+  @Field(() => UserRoleListRelationFilter, {
+    nullable: true,
+  })
+  userRoles?: UserRoleListRelationFilter;
 }
 
 export { RoleWhereInput };

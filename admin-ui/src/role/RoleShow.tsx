@@ -1,11 +1,17 @@
 import * as React from "react";
+
 import {
   Show,
   SimpleShowLayout,
   ShowProps,
   DateField,
   TextField,
+  ReferenceManyField,
+  Datagrid,
+  ReferenceField,
 } from "react-admin";
+
+import { ROLE_TITLE_FIELD } from "./RoleTitle";
 
 export const RoleShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -16,6 +22,20 @@ export const RoleShow = (props: ShowProps): React.ReactElement => {
         <TextField label="roleDescription" source="roleDescription" />
         <TextField label="roleName" source="roleName" />
         <DateField source="updatedAt" label="Updated At" />
+        <ReferenceManyField
+          reference="UserRole"
+          target="RoleId"
+          label="UserRoles"
+        >
+          <Datagrid rowClick="show">
+            <DateField source="createdAt" label="Created At" />
+            <TextField label="ID" source="id" />
+            <ReferenceField label="Role" source="role.id" reference="Role">
+              <TextField source={ROLE_TITLE_FIELD} />
+            </ReferenceField>
+            <DateField source="updatedAt" label="Updated At" />
+          </Datagrid>
+        </ReferenceManyField>
       </SimpleShowLayout>
     </Show>
   );
