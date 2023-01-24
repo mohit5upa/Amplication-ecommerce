@@ -13,12 +13,11 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
+import { IsOptional } from "class-validator";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { UserRoleListRelationFilter } from "../../userRole/base/UserRoleListRelationFilter";
 
 @InputType()
 class UserWhereInput {
@@ -186,18 +185,6 @@ class UserWhereInput {
     nullable: true,
   })
   username?: StringFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => UserRoleListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => UserRoleListRelationFilter)
-  @IsOptional()
-  @Field(() => UserRoleListRelationFilter, {
-    nullable: true,
-  })
-  userRoles?: UserRoleListRelationFilter;
 }
 
 export { UserWhereInput };
