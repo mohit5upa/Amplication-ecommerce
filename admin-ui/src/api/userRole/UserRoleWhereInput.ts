@@ -4,6 +4,6 @@ import { UserListRelationFilter } from "../user/UserListRelationFilter";
 
 export type UserRoleWhereInput = {
   id?: StringFilter;
-  roles?: RoleListRelationFilter;
+  role?: RoleListRelationFilter;
   user?: UserListRelationFilter;
 };

@@ -1,12 +1,14 @@
 import * as React from "react";
+
 import {
   Create,
   SimpleForm,
   CreateProps,
   TextInput,
-  ReferenceInput,
-  SelectInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
 } from "react-admin";
+
 import { UserRoleTitle } from "../userRole/UserRoleTitle";
 
 export const RoleCreate = (props: CreateProps): React.ReactElement => {
@@ -15,13 +17,14 @@ export const RoleCreate = (props: CreateProps): React.ReactElement => {
       <SimpleForm>
         <TextInput label="roleDescription" multiline source="roleDescription" />
         <TextInput label="roleName" source="roleName" />
-        <ReferenceInput
-          source="userrole.id"
+        <ReferenceArrayInput
+          source="userRoles"
           reference="UserRole"
-          label="userRoles"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
         >
-          <SelectInput optionText={UserRoleTitle} />
-        </ReferenceInput>
+          <SelectArrayInput optionText={UserRoleTitle} />
+        </ReferenceArrayInput>
       </SimpleForm>
     </Create>
   );

@@ -40,7 +40,7 @@ class UserRoleWhereInput {
   @Field(() => RoleListRelationFilter, {
     nullable: true,
   })
-  roles?: RoleListRelationFilter;
+  role?: RoleListRelationFilter;
 
   @ApiProperty({
     required: false,

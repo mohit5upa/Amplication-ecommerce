@@ -183,14 +183,14 @@ export class UserRoleControllerBase {
     action: "read",
     possession: "any",
   })
-  @common.Get("/:id/roles")
+  @common.Get("/:id/role")
   @ApiNestedQuery(RoleFindManyArgs)
-  async findManyRoles(
+  async findManyRole(
     @common.Req() request: Request,
     @common.Param() params: UserRoleWhereUniqueInput
   ): Promise<Role[]> {
     const query = plainToClass(RoleFindManyArgs, request.query);
-    const results = await this.service.findRoles(params.id, {
+    const results = await this.service.findRole(params.id, {
       ...query,
       select: {
         createdAt: true,
@@ -198,12 +198,6 @@ export class UserRoleControllerBase {
         roleDescription: true,
         roleName: true,
         updatedAt: true,
-
-        userRole: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (results === null) {
@@ -219,13 +213,13 @@ export class UserRoleControllerBase {
     action: "update",
     possession: "any",
   })
-  @common.Post("/:id/roles")
-  async connectRoles(
+  @common.Post("/:id/role")
+  async connectRole(
     @common.Param() params: UserRoleWhereUniqueInput,
     @common.Body() body: RoleWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      roles: {
+      role: {
         connect: body,
       },
     };
@@ -241,13 +235,13 @@ export class UserRoleControllerBase {
     action: "update",
     possession: "any",
   })
-  @common.Patch("/:id/roles")
-  async updateRoles(
+  @common.Patch("/:id/role")
+  async updateRole(
     @common.Param() params: UserRoleWhereUniqueInput,
     @common.Body() body: RoleWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      roles: {
+      role: {
         set: body,
       },
     };
@@ -263,13 +257,13 @@ export class UserRoleControllerBase {
     action: "update",
     possession: "any",
   })
-  @common.Delete("/:id/roles")
-  async disconnectRoles(
+  @common.Delete("/:id/role")
+  async disconnectRole(
     @common.Param() params: UserRoleWhereUniqueInput,
     @common.Body() body: RoleWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      roles: {
+      role: {
         disconnect: body,
       },
     };

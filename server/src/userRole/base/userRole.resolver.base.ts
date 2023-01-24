@@ -157,11 +157,11 @@ export class UserRoleResolverBase {
     action: "read",
     possession: "any",
   })
-  async roles(
+  async role(
     @graphql.Parent() parent: UserRole,
     @graphql.Args() args: RoleFindManyArgs
   ): Promise<Role[]> {
-    const results = await this.service.findRoles(parent.id, args);
+    const results = await this.service.findRole(parent.id, args);
 
     if (!results) {
       return [];

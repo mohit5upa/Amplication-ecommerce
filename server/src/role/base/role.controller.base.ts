@@ -27,6 +27,9 @@ import { RoleWhereUniqueInput } from "./RoleWhereUniqueInput";
 import { RoleFindManyArgs } from "./RoleFindManyArgs";
 import { RoleUpdateInput } from "./RoleUpdateInput";
 import { Role } from "./Role";
+import { UserRoleFindManyArgs } from "../../userRole/base/UserRoleFindManyArgs";
+import { UserRole } from "../../userRole/base/UserRole";
+import { UserRoleWhereUniqueInput } from "../../userRole/base/UserRoleWhereUniqueInput";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class RoleControllerBase {
@@ -46,27 +49,13 @@ export class RoleControllerBase {
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(@common.Body() data: RoleCreateInput): Promise<Role> {
     return await this.service.create({
-      data: {
-        ...data,
-
-        userRole: data.userRole
-          ? {
-              connect: data.userRole,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         createdAt: true,
         id: true,
         roleDescription: true,
         roleName: true,
         updatedAt: true,
-
-        userRole: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
@@ -91,12 +80,6 @@ export class RoleControllerBase {
         roleDescription: true,
         roleName: true,
         updatedAt: true,
-
-        userRole: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
@@ -122,12 +105,6 @@ export class RoleControllerBase {
         roleDescription: true,
         roleName: true,
         updatedAt: true,
-
-        userRole: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (result === null) {
@@ -155,27 +132,13 @@ export class RoleControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          userRole: data.userRole
-            ? {
-                connect: data.userRole,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           createdAt: true,
           id: true,
           roleDescription: true,
           roleName: true,
           updatedAt: true,
-
-          userRole: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {
@@ -209,12 +172,6 @@ export class RoleControllerBase {
           roleDescription: true,
           roleName: true,
           updatedAt: true,
-
-          userRole: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {
@@ -225,5 +182,100 @@ export class RoleControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @nestAccessControl.UseRoles({
+    resource: "UserRole",
+    action: "read",
+    possession: "any",
+  })
+  @common.Get("/:id/userRoles")
+  @ApiNestedQuery(UserRoleFindManyArgs)
+  async findManyUserRoles(
+    @common.Req() request: Request,
+    @common.Param() params: RoleWhereUniqueInput
+  ): Promise<UserRole[]> {
+    const query = plainToClass(UserRoleFindManyArgs, request.query);
+    const results = await this.service.findUserRoles(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Role",
+    action: "update",
+    possession: "any",
+  })
+  @common.Post("/:id/userRoles")
+  async connectUserRoles(
+    @common.Param() params: RoleWhereUniqueInput,
+    @common.Body() body: UserRoleWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userRoles: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Role",
+    action: "update",
+    possession: "any",
+  })
+  @common.Patch("/:id/userRoles")
+  async updateUserRoles(
+    @common.Param() params: RoleWhereUniqueInput,
+    @common.Body() body: UserRoleWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userRoles: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "Role",
+    action: "update",
+    possession: "any",
+  })
+  @common.Delete("/:id/userRoles")
+  async disconnectUserRoles(
+    @common.Param() params: RoleWhereUniqueInput,
+    @common.Body() body: UserRoleWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      userRoles: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

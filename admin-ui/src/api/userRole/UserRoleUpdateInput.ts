@@ -2,6 +2,6 @@ import { RoleUpdateManyWithoutUserRolesInput } from "./RoleUpdateManyWithoutUser
 import { UserUpdateManyWithoutUserRolesInput } from "./UserUpdateManyWithoutUserRolesInput";
 
 export type UserRoleUpdateInput = {
-  roles?: RoleUpdateManyWithoutUserRolesInput;
+  role?: RoleUpdateManyWithoutUserRolesInput;
   user?: UserUpdateManyWithoutUserRolesInput;
 };

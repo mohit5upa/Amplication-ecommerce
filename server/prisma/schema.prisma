@@ -32,19 +32,18 @@ model User {
 }
 
 model Role {
-  createdAt       DateTime  @default(now())
-  id              String    @id @default(cuid())
+  createdAt       DateTime   @default(now())
+  id              String     @id @default(cuid())
   roleDescription String
   roleName        String
-  updatedAt       DateTime  @updatedAt
-  userRole        UserRole? @relation(fields: [userRoleId], references: [id])
-  userRoleId      String?
+  updatedAt       DateTime   @updatedAt
+  userRoles       UserRole[]
 }
 
 model UserRole {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
-  roles     Role[]
+  role      Role[]
   updatedAt DateTime @updatedAt
   user      User[]
 }

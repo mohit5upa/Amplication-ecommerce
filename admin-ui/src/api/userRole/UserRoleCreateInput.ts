@@ -2,6 +2,6 @@ import { RoleCreateNestedManyWithoutUserRolesInput } from "./RoleCreateNestedMan
 import { UserCreateNestedManyWithoutUserRolesInput } from "./UserCreateNestedManyWithoutUserRolesInput";
 
 export type UserRoleCreateInput = {
-  roles?: RoleCreateNestedManyWithoutUserRolesInput;
+  role?: RoleCreateNestedManyWithoutUserRolesInput;
   user?: UserCreateNestedManyWithoutUserRolesInput;
 };

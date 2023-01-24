@@ -10,58 +10,37 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
+import { UserRoleWhereUniqueInput } from "../../userRole/base/UserRoleWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
-import { SortOrder } from "../../util/SortOrder";
 
-@InputType({
-  isAbstract: true,
-  description: undefined,
-})
-class RoleOrderByInput {
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @Field(() => SortOrder, {
+@InputType()
+class UserRoleUpdateManyWithoutRolesInput {
+  @Field(() => [UserRoleWhereUniqueInput], {
     nullable: true,
   })
-  createdAt?: SortOrder;
-
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    type: () => [UserRoleWhereUniqueInput],
   })
-  @Field(() => SortOrder, {
+  connect?: Array<UserRoleWhereUniqueInput>;
+
+  @Field(() => [UserRoleWhereUniqueInput], {
     nullable: true,
   })
-  id?: SortOrder;
-
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    type: () => [UserRoleWhereUniqueInput],
   })
-  @Field(() => SortOrder, {
+  disconnect?: Array<UserRoleWhereUniqueInput>;
+
+  @Field(() => [UserRoleWhereUniqueInput], {
     nullable: true,
   })
-  roleDescription?: SortOrder;
-
   @ApiProperty({
     required: false,
-    enum: ["asc", "desc"],
+    type: () => [UserRoleWhereUniqueInput],
   })
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  roleName?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
-  updatedAt?: SortOrder;
+  set?: Array<UserRoleWhereUniqueInput>;
 }
 
-export { RoleOrderByInput };
+export { UserRoleUpdateManyWithoutRolesInput };

@@ -25,6 +25,7 @@ import { DeleteRoleArgs } from "./DeleteRoleArgs";
 import { RoleFindManyArgs } from "./RoleFindManyArgs";
 import { RoleFindUniqueArgs } from "./RoleFindUniqueArgs";
 import { Role } from "./Role";
+import { UserRoleFindManyArgs } from "../../userRole/base/UserRoleFindManyArgs";
 import { UserRole } from "../../userRole/base/UserRole";
 import { RoleService } from "../role.service";
 
@@ -91,15 +92,7 @@ export class RoleResolverBase {
   async createRole(@graphql.Args() args: CreateRoleArgs): Promise<Role> {
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        userRole: args.data.userRole
-          ? {
-              connect: args.data.userRole,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -114,15 +107,7 @@ export class RoleResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          userRole: args.data.userRole
-            ? {
-                connect: args.data.userRole,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -154,18 +139,22 @@ export class RoleResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => UserRole, { nullable: true })
+  @graphql.ResolveField(() => [UserRole])
   @nestAccessControl.UseRoles({
     resource: "UserRole",
     action: "read",
     possession: "any",
   })
-  async userRole(@graphql.Parent() parent: Role): Promise<UserRole | null> {
-    const result = await this.service.getUserRole(parent.id);
+  async userRoles(
+    @graphql.Parent() parent: Role,
+    @graphql.Args() args: UserRoleFindManyArgs
+  ): Promise<UserRole[]> {
+    const results = await this.service.findUserRoles(parent.id, args);
 
-    if (!result) {
-      return null;
+    if (!results) {
+      return [];
     }
-    return result;
+
+    return results;
   }
 }

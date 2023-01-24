@@ -28,7 +28,7 @@ class UserRoleCreateInput {
   @Field(() => RoleCreateNestedManyWithoutUserRolesInput, {
     nullable: true,
   })
-  roles?: RoleCreateNestedManyWithoutUserRolesInput;
+  role?: RoleCreateNestedManyWithoutUserRolesInput;
 
   @ApiProperty({
     required: false,

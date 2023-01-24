@@ -28,7 +28,7 @@ class UserRoleUpdateInput {
   @Field(() => RoleUpdateManyWithoutUserRolesInput, {
     nullable: true,
   })
-  roles?: RoleUpdateManyWithoutUserRolesInput;
+  role?: RoleUpdateManyWithoutUserRolesInput;
 
   @ApiProperty({
     required: false,
