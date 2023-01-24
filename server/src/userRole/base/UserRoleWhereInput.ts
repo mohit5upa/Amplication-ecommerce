@@ -13,8 +13,9 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
-import { IntFilter } from "../../util/IntFilter";
+import { IsOptional, ValidateNested } from "class-validator";
+import { RoleListRelationFilter } from "../../role/base/RoleListRelationFilter";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class UserRoleWhereInput {
@@ -31,25 +32,27 @@ class UserRoleWhereInput {
 
   @ApiProperty({
     required: false,
-    type: IntFilter,
+    type: () => RoleListRelationFilter,
   })
-  @Type(() => IntFilter)
+  @ValidateNested()
+  @Type(() => RoleListRelationFilter)
   @IsOptional()
-  @Field(() => IntFilter, {
+  @Field(() => RoleListRelationFilter, {
     nullable: true,
   })
-  roleId?: IntFilter;
+  roleId?: RoleListRelationFilter;
 
   @ApiProperty({
     required: false,
-    type: IntFilter,
+    type: () => UserWhereUniqueInput,
   })
-  @Type(() => IntFilter)
+  @ValidateNested()
+  @Type(() => UserWhereUniqueInput)
   @IsOptional()
-  @Field(() => IntFilter, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  userId?: IntFilter;
+  userId?: UserWhereUniqueInput;
 }
 
 export { UserRoleWhereInput };

@@ -28,63 +28,26 @@ model User {
   token           String?
   updatedAt       DateTime         @updatedAt
   username        String           @unique
-}
-
-model Role {
-  createdAt       DateTime @default(now())
-  id              String   @id @default(cuid())
-  roleDescription String
-  roleName        String
-  updatedAt       DateTime @updatedAt
+  userRoles       UserRole[]
 }
 
 model UserRole {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
-  roleId    Int
+  roleId    Role[]
   updatedAt DateTime @updatedAt
-  userId    Int
+  userId    User     @relation(fields: [userIdId], references: [id])
+  userIdId  String
 }
 
-model ProductCategory {
-  categoryId Int?
-  createdAt  DateTime @default(now())
-  id         String   @id @default(cuid())
-  productId  Int?
-  updatedAt  DateTime @updatedAt
-}
-
-model CustomerGroup {
-  code          String?
-  createdAt     DateTime @default(now())
-  id            String   @id @default(cuid())
-  isUserDefined Int
-  name          String?
-  updatedAt     DateTime @updatedAt
-}
-
-model Category {
-  categoryIconPath String?
-  createdAt        DateTime @default(now())
-  displayMode      String
-  id               String   @id @default(cuid())
-  image            String
-  lft              Int
-  parentId         Int?
-  position         Int
-  rgt              Int?
-  status           Int
-  updatedAt        DateTime @updatedAt
-}
-
-model Product {
-  attributeFamilyId Int
-  createdAt         DateTime @default(now())
-  id                String   @id @default(cuid())
-  parentId          Int
-  sku               String   @unique
-  types             String
-  updatedAt         DateTime @updatedAt
+model Role {
+  createdAt       DateTime  @default(now())
+  id              String    @id @default(cuid())
+  roleDescription String
+  roleName        String
+  updatedAt       DateTime  @updatedAt
+  userRole        UserRole? @relation(fields: [userRoleId], references: [id])
+  userRoleId      String?
 }
 
 enum EnumUserGender {

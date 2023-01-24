@@ -1,4 +1,5 @@
 import { InputJsonValue } from "../../types";
+import { UserRoleCreateNestedManyWithoutUsersInput } from "./UserRoleCreateNestedManyWithoutUsersInput";
 
 export type UserCreateInput = {
   apiToken?: string | null;
@@ -18,4 +19,5 @@ export type UserCreateInput = {
   status?: boolean | null;
   token?: string | null;
   username: string;
+  userRoles?: UserRoleCreateNestedManyWithoutUsersInput;
 };

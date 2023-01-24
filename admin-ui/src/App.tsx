@@ -9,30 +9,14 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { RoleList } from "./role/RoleList";
-import { RoleCreate } from "./role/RoleCreate";
-import { RoleEdit } from "./role/RoleEdit";
-import { RoleShow } from "./role/RoleShow";
 import { UserRoleList } from "./userRole/UserRoleList";
 import { UserRoleCreate } from "./userRole/UserRoleCreate";
 import { UserRoleEdit } from "./userRole/UserRoleEdit";
 import { UserRoleShow } from "./userRole/UserRoleShow";
-import { ProductCategoryList } from "./productCategory/ProductCategoryList";
-import { ProductCategoryCreate } from "./productCategory/ProductCategoryCreate";
-import { ProductCategoryEdit } from "./productCategory/ProductCategoryEdit";
-import { ProductCategoryShow } from "./productCategory/ProductCategoryShow";
-import { CustomerGroupList } from "./customerGroup/CustomerGroupList";
-import { CustomerGroupCreate } from "./customerGroup/CustomerGroupCreate";
-import { CustomerGroupEdit } from "./customerGroup/CustomerGroupEdit";
-import { CustomerGroupShow } from "./customerGroup/CustomerGroupShow";
-import { CategoryList } from "./category/CategoryList";
-import { CategoryCreate } from "./category/CategoryCreate";
-import { CategoryEdit } from "./category/CategoryEdit";
-import { CategoryShow } from "./category/CategoryShow";
-import { ProductList } from "./product/ProductList";
-import { ProductCreate } from "./product/ProductCreate";
-import { ProductEdit } from "./product/ProductEdit";
-import { ProductShow } from "./product/ProductShow";
+import { RoleList } from "./role/RoleList";
+import { RoleCreate } from "./role/RoleCreate";
+import { RoleEdit } from "./role/RoleEdit";
+import { RoleShow } from "./role/RoleShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -67,13 +51,6 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="Role"
-          list={RoleList}
-          edit={RoleEdit}
-          create={RoleCreate}
-          show={RoleShow}
-        />
-        <Resource
           name="UserRole"
           list={UserRoleList}
           edit={UserRoleEdit}
@@ -81,32 +58,11 @@ const App = (): React.ReactElement => {
           show={UserRoleShow}
         />
         <Resource
-          name="ProductCategory"
-          list={ProductCategoryList}
-          edit={ProductCategoryEdit}
-          create={ProductCategoryCreate}
-          show={ProductCategoryShow}
-        />
-        <Resource
-          name="CustomerGroup"
-          list={CustomerGroupList}
-          edit={CustomerGroupEdit}
-          create={CustomerGroupCreate}
-          show={CustomerGroupShow}
-        />
-        <Resource
-          name="Category"
-          list={CategoryList}
-          edit={CategoryEdit}
-          create={CategoryCreate}
-          show={CategoryShow}
-        />
-        <Resource
-          name="Product"
-          list={ProductList}
-          edit={ProductEdit}
-          create={ProductCreate}
-          show={ProductShow}
+          name="Role"
+          list={RoleList}
+          edit={RoleEdit}
+          create={RoleCreate}
+          show={RoleShow}
         />
       </Admin>
     </div>

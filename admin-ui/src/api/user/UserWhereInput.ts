@@ -3,6 +3,7 @@ import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
+import { UserRoleListRelationFilter } from "../userRole/UserRoleListRelationFilter";
 
 export type UserWhereInput = {
   apiToken?: StringNullableFilter;
@@ -20,4 +21,5 @@ export type UserWhereInput = {
   status?: BooleanNullableFilter;
   token?: StringNullableFilter;
   username?: StringFilter;
+  userRoles?: UserRoleListRelationFilter;
 };

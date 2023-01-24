@@ -46,13 +46,27 @@ export class RoleControllerBase {
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(@common.Body() data: RoleCreateInput): Promise<Role> {
     return await this.service.create({
-      data: data,
+      data: {
+        ...data,
+
+        userRole: data.userRole
+          ? {
+              connect: data.userRole,
+            }
+          : undefined,
+      },
       select: {
         createdAt: true,
         id: true,
         roleDescription: true,
         roleName: true,
         updatedAt: true,
+
+        userRole: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -77,6 +91,12 @@ export class RoleControllerBase {
         roleDescription: true,
         roleName: true,
         updatedAt: true,
+
+        userRole: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -102,6 +122,12 @@ export class RoleControllerBase {
         roleDescription: true,
         roleName: true,
         updatedAt: true,
+
+        userRole: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     if (result === null) {
@@ -129,13 +155,27 @@ export class RoleControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          userRole: data.userRole
+            ? {
+                connect: data.userRole,
+              }
+            : undefined,
+        },
         select: {
           createdAt: true,
           id: true,
           roleDescription: true,
           roleName: true,
           updatedAt: true,
+
+          userRole: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
@@ -169,6 +209,12 @@ export class RoleControllerBase {
           roleDescription: true,
           roleName: true,
           updatedAt: true,
+
+          userRole: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
