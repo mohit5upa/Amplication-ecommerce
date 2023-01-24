@@ -273,12 +273,6 @@ export class UserControllerBase {
         createdAt: true,
         id: true,
         updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (results === null) {
