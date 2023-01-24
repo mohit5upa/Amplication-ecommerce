@@ -15,7 +15,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { RoleWhereUniqueInput } from "../../role/base/RoleWhereUniqueInput";
-import { UserListRelationFilter } from "../../user/base/UserListRelationFilter";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class UserRoleWhereInput {
@@ -44,15 +44,15 @@ class UserRoleWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserListRelationFilter,
+    type: () => UserWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserListRelationFilter)
+  @Type(() => UserWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserListRelationFilter, {
+  @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  user?: UserListRelationFilter;
+  user?: UserWhereUniqueInput;
 }
 
 export { UserRoleWhereInput };

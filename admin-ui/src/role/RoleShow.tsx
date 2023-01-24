@@ -12,6 +12,7 @@ import {
 } from "react-admin";
 
 import { ROLE_TITLE_FIELD } from "./RoleTitle";
+import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const RoleShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -34,6 +35,9 @@ export const RoleShow = (props: ShowProps): React.ReactElement => {
               <TextField source={ROLE_TITLE_FIELD} />
             </ReferenceField>
             <DateField source="updatedAt" label="Updated At" />
+            <ReferenceField label="User" source="user.id" reference="User">
+              <TextField source={USER_TITLE_FIELD} />
+            </ReferenceField>
           </Datagrid>
         </ReferenceManyField>
       </SimpleShowLayout>

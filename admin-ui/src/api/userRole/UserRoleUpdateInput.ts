@@ -1,7 +1,7 @@
 import { RoleWhereUniqueInput } from "../role/RoleWhereUniqueInput";
-import { UserUpdateManyWithoutUserRolesInput } from "./UserUpdateManyWithoutUserRolesInput";
+import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type UserRoleUpdateInput = {
   role?: RoleWhereUniqueInput | null;
-  user?: UserUpdateManyWithoutUserRolesInput;
+  user?: UserWhereUniqueInput | null;
 };

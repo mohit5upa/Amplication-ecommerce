@@ -5,4 +5,5 @@ export type UserRoleOrderByInput = {
   id?: SortOrder;
   roleId?: SortOrder;
   updatedAt?: SortOrder;
+  userId?: SortOrder;
 };

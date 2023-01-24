@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma, UserRole, User, Role } from "@prisma/client";
+import { Prisma, UserRole, Role, User } from "@prisma/client";
 
 export class UserRoleServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -47,22 +47,19 @@ export class UserRoleServiceBase {
     return this.prisma.userRole.delete(args);
   }
 
-  async findUser(
-    parentId: string,
-    args: Prisma.UserFindManyArgs
-  ): Promise<User[]> {
-    return this.prisma.userRole
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .user(args);
-  }
-
   async getRole(parentId: string): Promise<Role | null> {
     return this.prisma.userRole
       .findUnique({
         where: { id: parentId },
       })
       .role();
+  }
+
+  async getUser(parentId: string): Promise<User | null> {
+    return this.prisma.userRole
+      .findUnique({
+        where: { id: parentId },
+      })
+      .user();
   }
 }
