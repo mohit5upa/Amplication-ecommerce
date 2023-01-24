@@ -1,14 +1,6 @@
 import * as React from "react";
-import {
-  List,
-  Datagrid,
-  ListProps,
-  DateField,
-  TextField,
-  ReferenceField,
-} from "react-admin";
+import { List, Datagrid, ListProps, DateField, TextField } from "react-admin";
 import Pagination from "../Components/Pagination";
-import { USERROLE_TITLE_FIELD } from "../userRole/UserRoleTitle";
 
 export const RoleList = (props: ListProps): React.ReactElement => {
   return (
@@ -25,13 +17,6 @@ export const RoleList = (props: ListProps): React.ReactElement => {
         <TextField label="roleDescription" source="roleDescription" />
         <TextField label="roleName" source="roleName" />
         <DateField source="updatedAt" label="Updated At" />
-        <ReferenceField
-          label="userRoles"
-          source="userrole.id"
-          reference="UserRole"
-        >
-          <TextField source={USERROLE_TITLE_FIELD} />
-        </ReferenceField>
       </Datagrid>
     </List>
   );

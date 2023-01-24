@@ -25,7 +25,6 @@ import { DeleteRoleArgs } from "./DeleteRoleArgs";
 import { RoleFindManyArgs } from "./RoleFindManyArgs";
 import { RoleFindUniqueArgs } from "./RoleFindUniqueArgs";
 import { Role } from "./Role";
-import { UserRole } from "../../userRole/base/UserRole";
 import { RoleService } from "../role.service";
 
 @graphql.Resolver(() => Role)
@@ -91,15 +90,7 @@ export class RoleResolverBase {
   async createRole(@graphql.Args() args: CreateRoleArgs): Promise<Role> {
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        userRole: args.data.userRole
-          ? {
-              connect: args.data.userRole,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -114,15 +105,7 @@ export class RoleResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          userRole: args.data.userRole
-            ? {
-                connect: args.data.userRole,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -151,21 +134,5 @@ export class RoleResolverBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => UserRole, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "UserRole",
-    action: "read",
-    possession: "any",
-  })
-  async userRole(@graphql.Parent() parent: Role): Promise<UserRole | null> {
-    const result = await this.service.getUserRole(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 }

@@ -11,9 +11,8 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, ValidateNested, IsOptional } from "class-validator";
+import { IsDate, IsString } from "class-validator";
 import { Type } from "class-transformer";
-import { UserRole } from "../../userRole/base/UserRole";
 
 @ObjectType()
 class Role {
@@ -56,15 +55,6 @@ class Role {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: () => UserRole,
-  })
-  @ValidateNested()
-  @Type(() => UserRole)
-  @IsOptional()
-  userRole?: UserRole | null;
 }
 
 export { Role };
