@@ -12,7 +12,7 @@ https://docs.amplication.com/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional, ValidateNested, IsInt } from "class-validator";
-import { CustomerUpdateManyWithoutAddressesInput } from "./CustomerUpdateManyWithoutAddressesInput";
+import { UserUpdateManyWithoutAddressesInput } from "./UserUpdateManyWithoutAddressesInput";
 import { Type } from "class-transformer";
 
 @InputType()
@@ -26,7 +26,7 @@ class AddressUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  address_1?: string | null;
+  address_1?: string;
 
   @ApiProperty({
     required: false,
@@ -48,19 +48,7 @@ class AddressUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  city?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CustomerUpdateManyWithoutAddressesInput,
-  })
-  @ValidateNested()
-  @Type(() => CustomerUpdateManyWithoutAddressesInput)
-  @IsOptional()
-  @Field(() => CustomerUpdateManyWithoutAddressesInput, {
-    nullable: true,
-  })
-  customers?: CustomerUpdateManyWithoutAddressesInput;
+  city?: string;
 
   @ApiProperty({
     required: false,
@@ -71,7 +59,19 @@ class AddressUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  state?: string | null;
+  state?: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserUpdateManyWithoutAddressesInput,
+  })
+  @ValidateNested()
+  @Type(() => UserUpdateManyWithoutAddressesInput)
+  @IsOptional()
+  @Field(() => UserUpdateManyWithoutAddressesInput, {
+    nullable: true,
+  })
+  user?: UserUpdateManyWithoutAddressesInput;
 
   @ApiProperty({
     required: false,

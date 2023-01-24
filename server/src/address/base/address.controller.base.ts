@@ -27,9 +27,9 @@ import { AddressWhereUniqueInput } from "./AddressWhereUniqueInput";
 import { AddressFindManyArgs } from "./AddressFindManyArgs";
 import { AddressUpdateInput } from "./AddressUpdateInput";
 import { Address } from "./Address";
-import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
-import { Customer } from "../../customer/base/Customer";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { UserFindManyArgs } from "../../user/base/UserFindManyArgs";
+import { User } from "../../user/base/User";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class AddressControllerBase {
@@ -201,33 +201,29 @@ export class AddressControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Customer",
+    resource: "User",
     action: "read",
     possession: "any",
   })
-  @common.Get("/:id/customers")
-  @ApiNestedQuery(CustomerFindManyArgs)
-  async findManyCustomers(
+  @common.Get("/:id/user")
+  @ApiNestedQuery(UserFindManyArgs)
+  async findManyUser(
     @common.Req() request: Request,
     @common.Param() params: AddressWhereUniqueInput
-  ): Promise<Customer[]> {
-    const query = plainToClass(CustomerFindManyArgs, request.query);
-    const results = await this.service.findCustomers(params.id, {
+  ): Promise<User[]> {
+    const query = plainToClass(UserFindManyArgs, request.query);
+    const results = await this.service.findUser(params.id, {
       ...query,
       select: {
-        address: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         email: true,
         firstName: true,
         id: true,
         lastName: true,
         phone: true,
+        roles: true,
         updatedAt: true,
+        username: true,
       },
     });
     if (results === null) {
@@ -243,13 +239,13 @@ export class AddressControllerBase {
     action: "update",
     possession: "any",
   })
-  @common.Post("/:id/customers")
-  async connectCustomers(
+  @common.Post("/:id/user")
+  async connectUser(
     @common.Param() params: AddressWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: UserWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      customers: {
+      user: {
         connect: body,
       },
     };
@@ -265,13 +261,13 @@ export class AddressControllerBase {
     action: "update",
     possession: "any",
   })
-  @common.Patch("/:id/customers")
-  async updateCustomers(
+  @common.Patch("/:id/user")
+  async updateUser(
     @common.Param() params: AddressWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: UserWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      customers: {
+      user: {
         set: body,
       },
     };
@@ -287,13 +283,13 @@ export class AddressControllerBase {
     action: "update",
     possession: "any",
   })
-  @common.Delete("/:id/customers")
-  async disconnectCustomers(
+  @common.Delete("/:id/user")
+  async disconnectUser(
     @common.Param() params: AddressWhereUniqueInput,
-    @common.Body() body: CustomerWhereUniqueInput[]
+    @common.Body() body: UserWhereUniqueInput[]
   ): Promise<void> {
     const data = {
-      customers: {
+      user: {
         disconnect: body,
       },
     };

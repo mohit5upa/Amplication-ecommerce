@@ -10,19 +10,19 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { InputType, Field } from "@nestjs/graphql";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { OrderWhereUniqueInput } from "../../order/base/OrderWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
 
 @InputType()
-class CustomerCreateNestedManyWithoutAddressesInput {
-  @Field(() => [CustomerWhereUniqueInput], {
+class OrderCreateNestedManyWithoutUsersInput {
+  @Field(() => [OrderWhereUniqueInput], {
     nullable: true,
   })
   @ApiProperty({
     required: false,
-    type: () => [CustomerWhereUniqueInput],
+    type: () => [OrderWhereUniqueInput],
   })
-  connect?: Array<CustomerWhereUniqueInput>;
+  connect?: Array<OrderWhereUniqueInput>;
 }
 
-export { CustomerCreateNestedManyWithoutAddressesInput };
+export { OrderCreateNestedManyWithoutUsersInput };

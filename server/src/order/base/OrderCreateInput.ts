@@ -11,25 +11,13 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { ValidateNested, IsOptional, IsNumber, IsInt } from "class-validator";
-import { Type } from "class-transformer";
+import { IsNumber, IsOptional, ValidateNested, IsInt } from "class-validator";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
+import { Type } from "class-transformer";
+import { UserCreateNestedManyWithoutOrdersInput } from "./UserCreateNestedManyWithoutOrdersInput";
 
 @InputType()
 class OrderCreateInput {
-  @ApiProperty({
-    required: false,
-    type: () => CustomerWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CustomerWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CustomerWhereUniqueInput, {
-    nullable: true,
-  })
-  customer?: CustomerWhereUniqueInput | null;
-
   @ApiProperty({
     required: false,
     type: Number,
@@ -42,38 +30,41 @@ class OrderCreateInput {
   discount?: number | null;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => ProductWhereUniqueInput,
   })
   @ValidateNested()
   @Type(() => ProductWhereUniqueInput)
-  @IsOptional()
-  @Field(() => ProductWhereUniqueInput, {
-    nullable: true,
-  })
-  product?: ProductWhereUniqueInput | null;
+  @Field(() => ProductWhereUniqueInput)
+  product!: ProductWhereUniqueInput;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: Number,
   })
   @IsInt()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  quantity?: number | null;
+  @Field(() => Number)
+  quantity!: number;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: Number,
   })
   @IsInt()
+  @Field(() => Number)
+  totalPrice!: number;
+
+  @ApiProperty({
+    required: false,
+    type: () => UserCreateNestedManyWithoutOrdersInput,
+  })
+  @ValidateNested()
+  @Type(() => UserCreateNestedManyWithoutOrdersInput)
   @IsOptional()
-  @Field(() => Number, {
+  @Field(() => UserCreateNestedManyWithoutOrdersInput, {
     nullable: true,
   })
-  totalPrice?: number | null;
+  user?: UserCreateNestedManyWithoutOrdersInput;
 }
 
 export { OrderCreateInput };

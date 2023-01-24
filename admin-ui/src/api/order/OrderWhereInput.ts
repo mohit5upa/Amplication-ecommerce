@@ -1,14 +1,14 @@
-import { CustomerWhereUniqueInput } from "../customer/CustomerWhereUniqueInput";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { ProductWhereUniqueInput } from "../product/ProductWhereUniqueInput";
-import { IntNullableFilter } from "../../util/IntNullableFilter";
+import { IntFilter } from "../../util/IntFilter";
+import { UserListRelationFilter } from "../user/UserListRelationFilter";
 
 export type OrderWhereInput = {
-  customer?: CustomerWhereUniqueInput;
   discount?: FloatNullableFilter;
   id?: StringFilter;
   product?: ProductWhereUniqueInput;
-  quantity?: IntNullableFilter;
-  totalPrice?: IntNullableFilter;
+  quantity?: IntFilter;
+  totalPrice?: IntFilter;
+  user?: UserListRelationFilter;
 };

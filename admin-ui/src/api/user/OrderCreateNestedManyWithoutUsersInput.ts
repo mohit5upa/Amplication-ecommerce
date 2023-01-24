@@ -1,5 +1,5 @@
 import { OrderWhereUniqueInput } from "../order/OrderWhereUniqueInput";
 
-export type OrderCreateNestedManyWithoutCustomersInput = {
+export type OrderCreateNestedManyWithoutUsersInput = {
   connect?: Array<OrderWhereUniqueInput>;
 };

@@ -8,51 +8,41 @@ generator client {
 }
 
 model User {
-  createdAt DateTime @default(now())
+  addresses Address[]
+  createdAt DateTime  @default(now())
+  email     String    @unique
   firstName String?
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   lastName  String?
+  orders    Order[]
   password  String
+  phone     String
   roles     Json
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+  updatedAt DateTime  @updatedAt
+  username  String    @unique
 }
 
 model Order {
-  createdAt  DateTime  @default(now())
-  customer   Customer? @relation(fields: [customerId], references: [id])
-  customerId String?
+  createdAt  DateTime @default(now())
   discount   Float?
-  id         String    @id @default(cuid())
-  product    Product?  @relation(fields: [productId], references: [id])
-  productId  String?
-  quantity   Int?
-  totalPrice Int?
-  updatedAt  DateTime  @updatedAt
-}
-
-model Customer {
-  address   Address? @relation(fields: [addressId], references: [id])
-  addressId String?
-  createdAt DateTime @default(now())
-  email     String?
-  firstName String?
-  id        String   @id @default(cuid())
-  lastName  String?
-  orders    Order[]
-  phone     String?
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(cuid())
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String
+  quantity   Int
+  totalPrice Int
+  updatedAt  DateTime @updatedAt
+  user       User[]
 }
 
 model Address {
-  address_1 String?
+  address_1 String
   address_2 String?
-  city      String?
-  createdAt DateTime   @default(now())
-  customers Customer[]
-  id        String     @id @default(cuid())
-  state     String?
-  updatedAt DateTime   @updatedAt
+  city      String
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  state     String
+  updatedAt DateTime @updatedAt
+  user      User[]
   zip       Int?
 }
 
