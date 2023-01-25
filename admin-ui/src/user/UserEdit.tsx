@@ -11,7 +11,7 @@ import {
   BooleanInput,
   PasswordInput,
   SelectArrayInput,
-  ReferenceInput,
+  ReferenceArrayInput,
 } from "react-admin";
 
 import { UserRoleTitle } from "../userRole/UserRoleTitle";
@@ -55,16 +55,17 @@ export const UserEdit = (props: EditProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
-        <BooleanInput label="status" source="status" />
+        <NumberInput step={1} label="status" source="status" />
         <TextInput label="token" source="token" />
         <TextInput label="Username" source="username" />
-        <ReferenceInput
-          source="userrole.id"
+        <ReferenceArrayInput
+          source="userRoles"
           reference="UserRole"
-          label="UserRoles"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
         >
-          <SelectInput optionText={UserRoleTitle} />
-        </ReferenceInput>
+          <SelectArrayInput optionText={UserRoleTitle} />
+        </ReferenceArrayInput>
       </SimpleForm>
     </Edit>
   );

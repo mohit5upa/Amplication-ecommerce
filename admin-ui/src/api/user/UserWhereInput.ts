@@ -3,8 +3,8 @@ import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { BooleanFilter } from "../../util/BooleanFilter";
-import { UserRoleWhereUniqueInput } from "../userRole/UserRoleWhereUniqueInput";
+import { IntFilter } from "../../util/IntFilter";
+import { UserRoleListRelationFilter } from "../userRole/UserRoleListRelationFilter";
 
 export type UserWhereInput = {
   apiToken?: StringNullableFilter;
@@ -20,8 +20,8 @@ export type UserWhereInput = {
   lastName?: StringNullableFilter;
   mobileNumber?: StringNullableFilter;
   rememberToken?: StringNullableFilter;
-  status?: BooleanFilter;
+  status?: IntFilter;
   token?: StringNullableFilter;
   username?: StringFilter;
-  userRoles?: UserRoleWhereUniqueInput;
+  userRoles?: UserRoleListRelationFilter;
 };

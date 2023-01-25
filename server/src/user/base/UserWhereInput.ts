@@ -19,8 +19,8 @@ import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumUserGender } from "./EnumUserGender";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { BooleanFilter } from "../../util/BooleanFilter";
-import { UserRoleWhereUniqueInput } from "../../userRole/base/UserRoleWhereUniqueInput";
+import { IntFilter } from "../../util/IntFilter";
+import { UserRoleListRelationFilter } from "../../userRole/base/UserRoleListRelationFilter";
 
 @InputType()
 class UserWhereInput {
@@ -169,14 +169,14 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
-    type: BooleanFilter,
+    type: IntFilter,
   })
-  @Type(() => BooleanFilter)
+  @Type(() => IntFilter)
   @IsOptional()
-  @Field(() => BooleanFilter, {
+  @Field(() => IntFilter, {
     nullable: true,
   })
-  status?: BooleanFilter;
+  status?: IntFilter;
 
   @ApiProperty({
     required: false,
@@ -202,15 +202,15 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserRoleWhereUniqueInput,
+    type: () => UserRoleListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => UserRoleWhereUniqueInput)
+  @Type(() => UserRoleListRelationFilter)
   @IsOptional()
-  @Field(() => UserRoleWhereUniqueInput, {
+  @Field(() => UserRoleListRelationFilter, {
     nullable: true,
   })
-  userRoles?: UserRoleWhereUniqueInput;
+  userRoles?: UserRoleListRelationFilter;
 }
 
 export { UserWhereInput };

@@ -185,11 +185,11 @@ class User {
 
   @ApiProperty({
     required: true,
-    type: Boolean,
+    type: Number,
   })
-  @IsBoolean()
-  @Field(() => Boolean)
-  status!: boolean;
+  @IsInt()
+  @Field(() => Number)
+  status!: number;
 
   @ApiProperty({
     required: false,
@@ -220,12 +220,12 @@ class User {
 
   @ApiProperty({
     required: false,
-    type: () => UserRole,
+    type: () => [UserRole],
   })
   @ValidateNested()
   @Type(() => UserRole)
   @IsOptional()
-  userRoles?: UserRole | null;
+  userRoles?: Array<UserRole>;
 }
 
 export { User };
