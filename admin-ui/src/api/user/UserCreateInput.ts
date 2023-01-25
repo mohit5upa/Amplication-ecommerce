@@ -16,7 +16,7 @@ export type UserCreateInput = {
   password: string;
   rememberToken?: string | null;
   roles: InputJsonValue;
-  status: number;
+  status: boolean;
   token?: string | null;
   username: string;
   userRoles?: UserRoleCreateNestedManyWithoutUsersInput;

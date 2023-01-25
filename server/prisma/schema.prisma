@@ -24,7 +24,7 @@ model User {
   password        String
   rememberToken   String?
   roles           Json
-  status          Int
+  status          Boolean
   token           String?
   updatedAt       DateTime        @updatedAt
   username        String          @unique
