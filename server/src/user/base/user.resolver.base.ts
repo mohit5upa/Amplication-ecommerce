@@ -25,7 +25,6 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
-import { UserRoleFindManyArgs } from "../../userRole/base/UserRoleFindManyArgs";
 import { UserRole } from "../../userRole/base/UserRole";
 import { UserService } from "../user.service";
 
@@ -92,7 +91,15 @@ export class UserResolverBase {
   async createUser(@graphql.Args() args: CreateUserArgs): Promise<User> {
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        userRoles: args.data.userRoles
+          ? {
+              connect: args.data.userRoles,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -107,7 +114,15 @@ export class UserResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          userRoles: args.data.userRoles
+            ? {
+                connect: args.data.userRoles,
+              }
+            : undefined,
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -139,22 +154,18 @@ export class UserResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [UserRole])
+  @graphql.ResolveField(() => UserRole, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "UserRole",
     action: "read",
     possession: "any",
   })
-  async userRoles(
-    @graphql.Parent() parent: User,
-    @graphql.Args() args: UserRoleFindManyArgs
-  ): Promise<UserRole[]> {
-    const results = await this.service.findUserRoles(parent.id, args);
+  async userRoles(@graphql.Parent() parent: User): Promise<UserRole | null> {
+    const result = await this.service.getUserRoles(parent.id);
 
-    if (!results) {
-      return [];
+    if (!result) {
+      return null;
     }
-
-    return results;
+    return result;
   }
 }
