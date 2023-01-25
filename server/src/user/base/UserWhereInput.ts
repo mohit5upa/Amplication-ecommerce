@@ -19,7 +19,7 @@ import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { EnumUserGender } from "./EnumUserGender";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { IntFilter } from "../../util/IntFilter";
+import { BooleanFilter } from "../../util/BooleanFilter";
 import { UserRoleListRelationFilter } from "../../userRole/base/UserRoleListRelationFilter";
 
 @InputType()
@@ -169,14 +169,14 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
-    type: IntFilter,
+    type: BooleanFilter,
   })
-  @Type(() => IntFilter)
+  @Type(() => BooleanFilter)
   @IsOptional()
-  @Field(() => IntFilter, {
+  @Field(() => BooleanFilter, {
     nullable: true,
   })
-  status?: IntFilter;
+  status?: BooleanFilter;
 
   @ApiProperty({
     required: false,

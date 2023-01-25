@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { UserRoleListRelationFilter } from "../../userRole/base/UserRoleListRelationFilter";
+import { UserRoleWhereUniqueInput } from "../../userRole/base/UserRoleWhereUniqueInput";
 
 @InputType()
 class RoleWhereInput {
@@ -53,15 +53,15 @@ class RoleWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserRoleListRelationFilter,
+    type: () => UserRoleWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserRoleListRelationFilter)
+  @Type(() => UserRoleWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserRoleListRelationFilter, {
+  @Field(() => UserRoleWhereUniqueInput, {
     nullable: true,
   })
-  userRoles?: UserRoleListRelationFilter;
+  userRoles?: UserRoleWhereUniqueInput;
 }
 
 export { RoleWhereInput };

@@ -1,18 +1,13 @@
 import * as React from "react";
-
 import {
   Show,
   SimpleShowLayout,
   ShowProps,
   DateField,
   TextField,
-  ReferenceManyField,
-  Datagrid,
   ReferenceField,
 } from "react-admin";
-
-import { ROLE_TITLE_FIELD } from "./RoleTitle";
-import { USER_TITLE_FIELD } from "../user/UserTitle";
+import { USERROLE_TITLE_FIELD } from "../userRole/UserRoleTitle";
 
 export const RoleShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -23,23 +18,13 @@ export const RoleShow = (props: ShowProps): React.ReactElement => {
         <TextField label="roleDescription" source="roleDescription" />
         <TextField label="roleName" source="roleName" />
         <DateField source="updatedAt" label="Updated At" />
-        <ReferenceManyField
-          reference="UserRole"
-          target="RoleId"
+        <ReferenceField
           label="UserRoles"
+          source="userrole.id"
+          reference="UserRole"
         >
-          <Datagrid rowClick="show">
-            <DateField source="createdAt" label="Created At" />
-            <TextField label="ID" source="id" />
-            <ReferenceField label="Role" source="role.id" reference="Role">
-              <TextField source={ROLE_TITLE_FIELD} />
-            </ReferenceField>
-            <DateField source="updatedAt" label="Updated At" />
-            <ReferenceField label="User" source="user.id" reference="User">
-              <TextField source={USER_TITLE_FIELD} />
-            </ReferenceField>
-          </Datagrid>
-        </ReferenceManyField>
+          <TextField source={USERROLE_TITLE_FIELD} />
+        </ReferenceField>
       </SimpleShowLayout>
     </Show>
   );
