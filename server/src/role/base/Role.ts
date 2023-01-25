@@ -59,12 +59,12 @@ class Role {
 
   @ApiProperty({
     required: false,
-    type: () => [UserRole],
+    type: () => UserRole,
   })
   @ValidateNested()
   @Type(() => UserRole)
   @IsOptional()
-  userRoles?: Array<UserRole>;
+  userRoles?: UserRole | null;
 }
 
 export { Role };

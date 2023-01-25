@@ -3,7 +3,7 @@ import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
-import { IntFilter } from "../../util/IntFilter";
+import { BooleanFilter } from "../../util/BooleanFilter";
 import { UserRoleListRelationFilter } from "../userRole/UserRoleListRelationFilter";
 
 export type UserWhereInput = {
@@ -20,7 +20,7 @@ export type UserWhereInput = {
   lastName?: StringNullableFilter;
   mobileNumber?: StringNullableFilter;
   rememberToken?: StringNullableFilter;
-  status?: IntFilter;
+  status?: BooleanFilter;
   token?: StringNullableFilter;
   username?: StringFilter;
   userRoles?: UserRoleListRelationFilter;

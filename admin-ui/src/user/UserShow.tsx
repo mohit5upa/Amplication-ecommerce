@@ -34,7 +34,7 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
         <TextField label="Mobile Number" source="mobileNumber" />
         <TextField label="rememberToken" source="rememberToken" />
         <TextField label="Roles" source="roles" />
-        <TextField label="status" source="status" />
+        <BooleanField label="status" source="status" />
         <TextField label="token" source="token" />
         <DateField source="updatedAt" label="Updated At" />
         <TextField label="Username" source="username" />

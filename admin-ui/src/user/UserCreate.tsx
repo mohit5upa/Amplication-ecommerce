@@ -55,7 +55,7 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
-        <NumberInput step={1} label="status" source="status" />
+        <BooleanInput label="status" source="status" />
         <TextInput label="token" source="token" />
         <TextInput label="Username" source="username" />
         <ReferenceArrayInput

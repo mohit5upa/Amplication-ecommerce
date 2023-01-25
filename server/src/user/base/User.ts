@@ -185,11 +185,11 @@ class User {
 
   @ApiProperty({
     required: true,
-    type: Number,
+    type: Boolean,
   })
-  @IsInt()
-  @Field(() => Number)
-  status!: number;
+  @IsBoolean()
+  @Field(() => Boolean)
+  status!: boolean;
 
   @ApiProperty({
     required: false,

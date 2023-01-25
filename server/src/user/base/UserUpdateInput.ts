@@ -186,14 +186,14 @@ class UserUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: Number,
+    type: Boolean,
   })
-  @IsInt()
+  @IsBoolean()
   @IsOptional()
-  @Field(() => Number, {
+  @Field(() => Boolean, {
     nullable: true,
   })
-  status?: number;
+  status?: boolean;
 
   @ApiProperty({
     required: false,
