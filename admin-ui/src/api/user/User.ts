@@ -21,5 +21,5 @@ export type User = {
   token: string | null;
   updatedAt: Date;
   username: string;
-  userRoles?: Array<UserRole>;
+  userRoles?: UserRole | null;
 };

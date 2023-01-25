@@ -11,7 +11,7 @@ import {
   BooleanInput,
   PasswordInput,
   SelectArrayInput,
-  ReferenceArrayInput,
+  ReferenceInput,
 } from "react-admin";
 
 import { UserRoleTitle } from "../userRole/UserRoleTitle";
@@ -58,14 +58,13 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
         <BooleanInput label="status" source="status" />
         <TextInput label="token" source="token" />
         <TextInput label="Username" source="username" />
-        <ReferenceArrayInput
-          source="userRoles"
+        <ReferenceInput
+          source="userrole.id"
           reference="UserRole"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
+          label="UserRoles"
         >
-          <SelectArrayInput optionText={UserRoleTitle} />
-        </ReferenceArrayInput>
+          <SelectInput optionText={UserRoleTitle} />
+        </ReferenceInput>
       </SimpleForm>
     </Create>
   );

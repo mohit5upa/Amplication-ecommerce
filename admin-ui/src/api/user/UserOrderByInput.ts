@@ -21,4 +21,5 @@ export type UserOrderByInput = {
   token?: SortOrder;
   updatedAt?: SortOrder;
   username?: SortOrder;
+  userRolesId?: SortOrder;
 };

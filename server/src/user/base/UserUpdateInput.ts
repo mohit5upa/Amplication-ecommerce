@@ -27,7 +27,7 @@ import { Type } from "class-transformer";
 import { EnumUserGender } from "./EnumUserGender";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
-import { UserRoleUpdateManyWithoutUsersInput } from "./UserRoleUpdateManyWithoutUsersInput";
+import { UserRoleWhereUniqueInput } from "../../userRole/base/UserRoleWhereUniqueInput";
 
 @InputType()
 class UserUpdateInput {
@@ -219,15 +219,15 @@ class UserUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserRoleUpdateManyWithoutUsersInput,
+    type: () => UserRoleWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserRoleUpdateManyWithoutUsersInput)
+  @Type(() => UserRoleWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserRoleUpdateManyWithoutUsersInput, {
+  @Field(() => UserRoleWhereUniqueInput, {
     nullable: true,
   })
-  userRoles?: UserRoleUpdateManyWithoutUsersInput;
+  userRoles?: UserRoleWhereUniqueInput | null;
 }
 
 export { UserUpdateInput };

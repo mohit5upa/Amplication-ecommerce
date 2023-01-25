@@ -7,13 +7,10 @@ import {
   TextField,
   DateField,
   BooleanField,
-  ReferenceManyField,
-  Datagrid,
   ReferenceField,
 } from "react-admin";
 
-import { ROLE_TITLE_FIELD } from "../role/RoleTitle";
-import { USER_TITLE_FIELD } from "./UserTitle";
+import { USERROLE_TITLE_FIELD } from "../userRole/UserRoleTitle";
 
 export const UserShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -38,23 +35,13 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
         <TextField label="token" source="token" />
         <DateField source="updatedAt" label="Updated At" />
         <TextField label="Username" source="username" />
-        <ReferenceManyField
-          reference="UserRole"
-          target="UserId"
+        <ReferenceField
           label="UserRoles"
+          source="userrole.id"
+          reference="UserRole"
         >
-          <Datagrid rowClick="show">
-            <DateField source="createdAt" label="Created At" />
-            <TextField label="ID" source="id" />
-            <ReferenceField label="Role" source="role.id" reference="Role">
-              <TextField source={ROLE_TITLE_FIELD} />
-            </ReferenceField>
-            <DateField source="updatedAt" label="Updated At" />
-            <ReferenceField label="User" source="user.id" reference="User">
-              <TextField source={USER_TITLE_FIELD} />
-            </ReferenceField>
-          </Datagrid>
-        </ReferenceManyField>
+          <TextField source={USERROLE_TITLE_FIELD} />
+        </ReferenceField>
       </SimpleShowLayout>
     </Show>
   );

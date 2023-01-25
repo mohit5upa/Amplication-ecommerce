@@ -20,7 +20,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { EnumUserGender } from "./EnumUserGender";
 import { BooleanNullableFilter } from "../../util/BooleanNullableFilter";
 import { BooleanFilter } from "../../util/BooleanFilter";
-import { UserRoleListRelationFilter } from "../../userRole/base/UserRoleListRelationFilter";
+import { UserRoleWhereUniqueInput } from "../../userRole/base/UserRoleWhereUniqueInput";
 
 @InputType()
 class UserWhereInput {
@@ -202,15 +202,15 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => UserRoleListRelationFilter,
+    type: () => UserRoleWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => UserRoleListRelationFilter)
+  @Type(() => UserRoleWhereUniqueInput)
   @IsOptional()
-  @Field(() => UserRoleListRelationFilter, {
+  @Field(() => UserRoleWhereUniqueInput, {
     nullable: true,
   })
-  userRoles?: UserRoleListRelationFilter;
+  userRoles?: UserRoleWhereUniqueInput;
 }
 
 export { UserWhereInput };
