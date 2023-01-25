@@ -17,9 +17,9 @@ export type User = {
   mobileNumber: string | null;
   rememberToken: string | null;
   roles: JsonValue;
-  status: boolean;
+  status: number;
   token: string | null;
   updatedAt: Date;
   username: string;
-  userRoles?: UserRole | null;
+  userRoles?: Array<UserRole>;
 };

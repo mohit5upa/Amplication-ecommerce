@@ -1,5 +1,5 @@
 import { InputJsonValue } from "../../types";
-import { UserRoleWhereUniqueInput } from "../userRole/UserRoleWhereUniqueInput";
+import { UserRoleUpdateManyWithoutUsersInput } from "./UserRoleUpdateManyWithoutUsersInput";
 
 export type UserUpdateInput = {
   apiToken?: string | null;
@@ -16,8 +16,8 @@ export type UserUpdateInput = {
   password?: string;
   rememberToken?: string | null;
   roles?: InputJsonValue;
-  status?: boolean;
+  status?: number;
   token?: string | null;
   username?: string;
-  userRoles?: UserRoleWhereUniqueInput | null;
+  userRoles?: UserRoleUpdateManyWithoutUsersInput;
 };
